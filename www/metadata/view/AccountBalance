@@ -1,0 +1,66 @@
+{
+    "type": "Ext.dataview.List",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "hideAnimation": null,
+        "itemId": "accountBalance",
+        "designer|userClassName": "AccountBalance",
+        "emptyText": "Add Transactions",
+        "pressedCls": "fp-item-pressed",
+        "store": "accountBalance",
+        "grouped": true
+    },
+    "configAlternates": {
+        "hideAnimation": "object"
+    },
+    "designerId": "d5abd865-dee8-4d55-9d66-d22990da7b1d",
+    "cn": [
+        {
+            "type": "Ext.XTemplate",
+            "reference": {
+                "name": "itemTpl",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "implHandler": [
+                    "<tpl if=\"amount &lt; 0\">",
+                    "\t<div><span style=\"float: right;\">({[this.displayBalance(values.amount)]})</span>{description}<br/></div>",
+                    "<tpl else>",
+                    "\t<div><span style=\"float: right;\">{[this.displayBalance(values.amount)]}</span>{description}<br/></div>",
+                    "</tpl>"
+                ],
+                "designer|displayName": "itemTpl"
+            },
+            "designerId": "544846c3-a9e2-4bbc-9034-c0e977e6a205",
+            "cn": [
+                {
+                    "type": "templatefunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "displayBalance",
+                        "designer|params": [
+                            "balance"
+                        ],
+                        "implHandler": [
+                            "if(balance < 0) {",
+                            "    return '$'+Math.abs(balance).toFixed(2);",
+                            "} else {",
+                            "    return '$'+balance.toFixed(2);",
+                            "}"
+                        ]
+                    },
+                    "designerId": "668710d5-4e53-4ed4-b53b-ab852c3a24b5"
+                }
+            ]
+        }
+    ]
+}

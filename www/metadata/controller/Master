@@ -1,0 +1,304 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Master"
+    },
+    "designerId": "abf23ca3-f10e-4d44-be75-af05a17ff996",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMainInitialize",
+                "implHandler": [
+                    "var main = component.getDraggable(),",
+                    "    me = this;",
+                    "",
+                    "component.element.addCls('main-inner');",
+                    "component.isOpen = false;",
+                    "",
+                    "main.on('drag', function(draggable, event, offsetX) {",
+                    "    //me.fadeButtons(offsetX / 100);",
+                    "});",
+                    "",
+                    "main.on('dragstart', function(draggable, event) {",
+                    "    component.element.removeCls('main-inner');",
+                    "    if(!component.isOpen) {",
+                    "",
+                    "        //me.showMenuButtons();",
+                    "    }",
+                    "});",
+                    "",
+                    "main.on('dragend', function(draggable) {",
+                    "",
+                    "    if(component.isOpen === false && draggable.offset.x > 50) {",
+                    "        draggable.setOffset(100, 0, {",
+                    "            type: 'slide',",
+                    "            duration: 100",
+                    "        });",
+                    "",
+                    "        component.isOpen = true;",
+                    "",
+                    "    } else {",
+                    "",
+                    "        draggable.setOffset(0, 0, {",
+                    "            type: 'slide',",
+                    "            duration: 100",
+                    "        });",
+                    "",
+                    "        component.isOpen = false;",
+                    "        //me.hideMenuButtons();",
+                    "",
+                    "    }",
+                    "",
+                    "    component.element.addCls('main-inner');",
+                    "});",
+                    "",
+                    "this.redirectTo('accounts');"
+                ],
+                "name": "initialize",
+                "designer|targetType": "Ext.Container",
+                "designer|controlQuery": "container#main"
+            },
+            "designerId": "fa3ca980-399b-4880-b6ab-5fbee408d1d2"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showMenuButtons",
+                "implHandler": [
+                    "var menu = Ext.ComponentQuery.query('#menu')[0],",
+                    "    buttons = menu.query('button');",
+                    "",
+                    "for(var i = 0; i < buttons.length; i++) {",
+                    "    buttons[i].show();",
+                    "}"
+                ]
+            },
+            "designerId": "2548640b-3a3f-41ba-b193-baf60cd7ef0d"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "hideMenuButtons",
+                "implHandler": [
+                    "var menu = Ext.ComponentQuery.query('#menu')[0],",
+                    "    buttons = menu.query('button');",
+                    "",
+                    "for(var i = 0; i < buttons.length; i++) {",
+                    "    buttons[i].hide();",
+                    "}"
+                ]
+            },
+            "designerId": "4e003ef3-371c-410f-9995-8d9dd5728d49"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "fadeButtons",
+                "designer|params": [
+                    "opacity"
+                ],
+                "implHandler": [
+                    "var menu = Ext.ComponentQuery.query('#menu')[0],",
+                    "    buttons = menu.query('button');",
+                    "",
+                    "",
+                    "if (opacity < 1) {",
+                    "    for(var i = 0; i < buttons.length; i++) {",
+                    "        buttons[i].element.setStyle('opacity', opacity);",
+                    "    }",
+                    "}"
+                ]
+            },
+            "designerId": "1ce98ae6-782b-4976-a61a-7d330373626d"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onBackTap",
+                "implHandler": [
+                    "var view = button.view,",
+                    "    main = Ext.getCmp('main'),",
+                    "    me = this;",
+                    "",
+                    "// back navigation logic...",
+                    "",
+                    "switch(view) {",
+                    "    case \"#accountForm\":",
+                    "    this.redirectTo('accounts');",
+                    "    break;",
+                    "    case \"#accountBalance\":",
+                    "    this.redirectTo('userAccounts');",
+                    "    break;",
+                    "    case \"#userAccountForm\":",
+                    "    this.redirectTo('userAccounts');",
+                    "    break;",
+                    "    case \"#userAccounts\":",
+                    "    me.redirectTo('accounts');",
+                    "",
+                    "//    main.query('#addUser')[0].show();",
+                    "//    main.query('#accountMenu')[0].hide();",
+                    " //   main.query('#menuButton')[0].show();",
+                    "//    main.query('#editUser')[0].hide();",
+                    "//    button.hide();",
+                    "    break;",
+                    "}",
+                    "",
+                    "console.log(view);"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#back"
+            },
+            "designerId": "f72a50c9-b4d9-401a-a341-ca091aa143b8"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMenuButtonTap",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    elem = main.element,",
+                    "    dragObj = main.getDraggable();",
+                    "",
+                    "",
+                    "if(main.isOpen) {",
+                    "    elem.translate(0,0,0);",
+                    "    dragObj.setOffset(0, 0);",
+                    "    //this.hideMenuButtons();",
+                    "    main.isOpen = false;",
+                    "    return;",
+                    "} ",
+                    "",
+                    "if(!main.isOpen){",
+                    "    elem.translate(250,0,0);",
+                    "    dragObj.setOffset(250, 0);",
+                    "    //this.showMenuButtons();",
+                    "    main.isOpen = true;",
+                    "    return;",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#menuButton"
+            },
+            "designerId": "b7af7e78-04e3-410b-8764-f3bfd49db038"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAddUserTap",
+                "implHandler": [
+                    "",
+                    "this.redirectTo('accountForm');",
+                    "//main.getActiveItem().getItemId();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#addUser"
+            },
+            "designerId": "ff049bfd-0061-4690-aca3-2ced72846c26"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onEditUserTap",
+                "implHandler": [
+                    "if(button.getText() === \"Edit\") {",
+                    "    button.setText('Cancel');",
+                    "    this.redirectTo('accountForm/edit');",
+                    "} else {",
+                    "    button.setText('Edit');",
+                    "    this.redirectTo('userAccounts');",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#editUser"
+            },
+            "designerId": "fcf36007-7da8-474c-920c-f74c35c42f1c"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAddUserAccountTap",
+                "implHandler": [
+                    "this.redirectTo('userAccountForm');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#addUserAccount"
+            },
+            "designerId": "d6495a4c-3dd4-4714-a3d1-fff518009fea"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onOneTimeTransactionTap",
+                "implHandler": [
+                    "",
+                    "this.redirectTo('accountBalanceForm');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#oneTimeTransaction"
+            },
+            "designerId": "f96d2c1f-d2d4-4797-804b-873df9102b4d"
+        }
+    ]
+}

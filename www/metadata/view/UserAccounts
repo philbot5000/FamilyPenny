@@ -1,0 +1,75 @@
+{
+    "type": "Ext.dataview.List",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "hideAnimation": [
+            "{type: 'slideOut', direction: 'right', reveal: true}"
+        ],
+        "itemId": "userAccounts",
+        "padding": null,
+        "showAnimation": null,
+        "designer|userClassName": "UserAccounts",
+        "emptyText": "add Accounts",
+        "pressedCls": "fp-item-pressed",
+        "store": "userAccounts",
+        "grouped": true
+    },
+    "configAlternates": {
+        "showAnimation": "object",
+        "hideAnimation": "object"
+    },
+    "designerId": "5ee1e0d9-06cb-4828-bf83-469b52ff9d83",
+    "cn": [
+        {
+            "type": "Ext.XTemplate",
+            "reference": {
+                "name": "itemTpl",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "implHandler": [
+                    "<span style=\"font-size: 1.4em;\">{name}</span>",
+                    "",
+                    "<tpl if=\"balance &gt; 0\">",
+                    "    <span class=\"positive\" style=\"float: right;\">{[this.displayBalance(values.balance)]}</span>",
+                    "<tpl elseif=\"balance &lt; 0\">",
+                    "    <span class=\"negative\" style=\"float: right;\">{[this.displayBalance(values.balance)]}</span>",
+                    "<tpl else>",
+                    "    <span class=\"zero\" style=\"float: right;\">{[this.displayBalance(values.balance)]}</span>",
+                    "</tpl>"
+                ],
+                "designer|displayName": "itemTpl"
+            },
+            "designerId": "a4dbdfe9-e75b-48f6-a1d5-3493df0356a5",
+            "cn": [
+                {
+                    "type": "templatefunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "displayBalance",
+                        "designer|params": [
+                            "balance"
+                        ],
+                        "implHandler": [
+                            "if(balance < 0) {",
+                            "    return '($'+Math.abs(balance).toFixed(2)+')';",
+                            "} else {",
+                            "    return '$'+balance.toFixed(2);",
+                            "}"
+                        ]
+                    },
+                    "designerId": "b28ee8f6-e250-40c4-b98e-cc29a4528787"
+                }
+            ]
+        }
+    ]
+}

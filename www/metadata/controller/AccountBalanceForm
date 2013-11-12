@@ -1,0 +1,140 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "AccountBalanceForm"
+    },
+    "designerId": "be074027-f3e4-4d5e-ad96-ae3274005ec7",
+    "cn": [
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "accountBalanceForm",
+                "fn": "showAccountBalanceForm",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    accountBalanceForm = Ext.create('FP.view.AccountBalanceForm'),",
+                    "    back = main.query('#back')[0];",
+                    "",
+                    "back.view = '#accountBalance';",
+                    "back.show();",
+                    "",
+                    "main.setActiveItem(accountBalanceForm);"
+                ]
+            },
+            "designerId": "f0fb9e4f-71ad-4c1f-9509-768ca32f0ad3"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUserAccount_idInitialize",
+                "implHandler": [
+                    ""
+                ],
+                "name": "initialize",
+                "designer|targetType": "Ext.field.Hidden",
+                "designer|controlQuery": "hiddenfield#userAccount_id"
+            },
+            "designerId": "9032c588-daf3-4ac5-9867-2564bf550b95"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAddTransactionTap",
+                "implHandler": [
+                    "var form = Ext.ComponentQuery.query('#accountBalanceForm')[0],",
+                    "    transactionValues = form.getValues(),",
+                    "    store = Ext.getStore('accountBalance'),",
+                    "    model = Ext.create('FP.model.AccountBalance', transactionValues),",
+                    "    errorMessage,",
+                    "    errors = model.validate();",
+                    "",
+                    "",
+                    "",
+                    "if(form.edit) {",
+                    "    // get record in local storage and set new values and sync...",
+                    "    var id = form.getValues().userAccount_id,",
+                    "        index = store.findExact('id', id),",
+                    "        record = store.getAt(index);",
+                    "",
+                    "    //record.set('firstName', accountValues.firstName);",
+                    "    //record.set('lastName', accountValues.lastName);",
+                    "",
+                    "    //store.sync();",
+                    "    //this.redirectTo('accounts');",
+                    "",
+                    "",
+                    "} else {",
+                    "",
+                    "    if(!errors.isValid()) {",
+                    "        errors.each(function(err) {",
+                    "            errorMessage += err.getMessage() + '\\n';",
+                    "        });",
+                    "",
+                    "        alert('Work in progress'+errorMessage);",
+                    "        console.log(errorMessage);",
+                    "",
+                    "    } else {",
+                    "",
+                    "        //model.set('date', new Date());",
+                    "        model.set('category', 'testing');",
+                    "",
+                    "        store.add(model);",
+                    "        store.sync();",
+                    "        FP.config.Runtime.setAccountBalance(model.data);",
+                    "",
+                    "        this.updateBalance();",
+                    "",
+                    "        this.redirectTo('accountBalance');",
+                    "    }",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#addTransaction"
+            },
+            "designerId": "c8fae1dc-0fba-41be-82f3-1d0a0b7ed7e1"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "updateBalance",
+                "implHandler": [
+                    "// Get UserAccounts Store... Get Current Record... Set balance... Sync Store...",
+                    "var store = Ext.getStore('userAccounts'),",
+                    "    index = store.findExact('id', FP.config.Runtime.getUserAccount().id),",
+                    "    record = store.getAt(index);",
+                    "",
+                    "",
+                    "record.set('balance', FP.app.calculateBalance());",
+                    "store.sync();"
+                ]
+            },
+            "designerId": "cbe40848-736e-4857-a5b1-c4ed37d62f52"
+        }
+    ]
+}

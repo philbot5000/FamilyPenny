@@ -1,0 +1,254 @@
+{
+    "type": "Ext.form.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "hideAnimation": null,
+        "itemId": "accountForm",
+        "showAnimation": null,
+        "designer|userClassName": "AccountForm",
+        "scrollable": [
+            "true"
+        ]
+    },
+    "configAlternates": {
+        "showAnimation": "object",
+        "hideAnimation": "object",
+        "scrollable": "object"
+    },
+    "designerId": "3115fe00-6bbb-4fff-9fb1-6020b019281c",
+    "cn": [
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": null,
+                "title": "Add Account"
+            },
+            "designerId": "18f355f8-6c17-4083-9e61-357d4cdab3de",
+            "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "firstName",
+                        "label": null,
+                        "labelWidth": null,
+                        "name": "firstName",
+                        "autoCapitalize": true,
+                        "placeHolder": "First Name"
+                    },
+                    "designerId": "ef4ba42d-b61f-4238-9aaa-1717afd90b47"
+                },
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "lastName",
+                        "label": null,
+                        "labelWidth": "35%",
+                        "name": "lastName",
+                        "autoCapitalize": true,
+                        "placeHolder": "Last Name"
+                    },
+                    "designerId": "12180411-928e-4411-bf24-31e1f0b6ba57"
+                },
+                {
+                    "type": "Ext.field.Email",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "email",
+                        "label": null,
+                        "labelWidth": "35%",
+                        "name": "email",
+                        "placeHolder": "email@example.com"
+                    },
+                    "designerId": "eea37382-4c84-4656-8785-4f4617ded998"
+                },
+                {
+                    "type": "Ext.field.Select",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "type",
+                        "label": null,
+                        "labelWidth": "35%",
+                        "name": "accountType",
+                        "placeHolder": "Account Type",
+                        "autoSelect": false,
+                        "options": [
+                            "[",
+                            "    {text: \"Child\", value: \"Child\"},",
+                            "    {text: \"Parent\", value: \"Parent\"},",
+                            "    {text: \"Relative\", value: \"Relative\"}",
+                            "]"
+                        ]
+                    },
+                    "designerId": "586820b8-9f5d-4f94-b5ae-dee6f7ef847d"
+                },
+                {
+                    "type": "Ext.field.Select",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "summary",
+                        "label": null,
+                        "labelWidth": "35%",
+                        "name": "summaryType",
+                        "placeHolder": "Summary Type",
+                        "autoSelect": false,
+                        "options": [
+                            "[",
+                            "    {text: \"Never\", value: \"Never\"},",
+                            "    {text: \"Daily\", value: \"Daily\"},",
+                            "    {text: \"Weekly\", value: \"Weekly\"},",
+                            "    {text: \"Monthly\", value: \"Monthly\"}",
+                            "]"
+                        ]
+                    },
+                    "designerId": "126652d3-0718-412c-be7f-fa977d43332b"
+                },
+                {
+                    "type": "Ext.field.Hidden",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "image",
+                        "name": "image"
+                    },
+                    "designerId": "691b2d37-5212-4ae7-bb87-b72a216557d2"
+                },
+                {
+                    "type": "Ext.Label",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "html": "User Options:",
+                        "padding": 7
+                    },
+                    "designerId": "e07623b9-00ed-46c5-a430-63fa1817f00a"
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "center",
+                        "itemId": "accountButtons",
+                        "padding": "5 10 10 10",
+                        "layout": "vbox"
+                    },
+                    "designerId": "56912dda-1bb2-4117-8c3f-379636f82dfa",
+                    "cn": [
+                        {
+                            "type": "Ext.SegmentedButton",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": null,
+                                "height": 35,
+                                "width": 250
+                            },
+                            "designerId": "dfea5abd-9dac-46ab-ae67-e7c261ceccfa",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "docked": null,
+                                        "height": null,
+                                        "itemId": "deleteUser",
+                                        "margin": null,
+                                        "right": null,
+                                        "ui": "decline-small",
+                                        "width": null,
+                                        "iconCls": "trash",
+                                        "text": "Delete"
+                                    },
+                                    "designerId": "c32af795-5b64-49e5-8404-e7a624ceb183"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "itemId": "takeImageButton",
+                                        "margin": null,
+                                        "ui": "action-small",
+                                        "width": null,
+                                        "iconCls": "user",
+                                        "text": "Image"
+                                    },
+                                    "designerId": "49c2a376-40eb-4fdd-92c5-1f516cc4d167"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "itemId": "submitUser",
+                                        "ui": "confirm-small",
+                                        "width": null,
+                                        "iconCls": "user",
+                                        "text": "Save"
+                                    },
+                                    "designerId": "f538f59a-de54-47aa-93d1-69abe02036a6"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,35 @@
+$list-bg-color: #fff;
+$list-header-bg-color: #f6f6f6;
+$base-gradient: flat;
+$picker-sheet-radius: 0px;
+$alert-color: #F25050;
+$active-color: #4C8AFF;
+$confirm-color: #65CE41;
+
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+@import 'sencha-touch/default';
+@import 'sencha-touch/default/all';
+
+// Custom code goes here..
+
+// Examples of using the icon mixin:
+// @include icon('user');
+
+@include font-face(
+	'familypenny',
+	inline-font-files(
+	'familypenny.woff',
+	woff,
+	'familypenny.ttf',
+	truetype,
+	'familypenny.svg',
+	svg
+	)
+);
+
+@include icon('reports', '\e603', 'familypenny');
+@include icon('back', '\e600', 'familypenny');
+@include icon('addUser', '\e602', 'familypenny');
+@include icon('menu', '\e601', 'familypenny');

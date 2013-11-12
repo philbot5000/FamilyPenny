@@ -1,0 +1,62 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Accounts"
+    },
+    "designerId": "c9434b44-df2f-4701-a9b4-9b1ef7841fa2",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountsItemTap",
+                "implHandler": [
+                    "FP.config.Runtime.setAccount(record.data);",
+                    "var store = Ext.getStore('userAccounts');",
+                    "",
+                    "store.filter('account_id', record.data.id, false, true);",
+                    "this.redirectTo('userAccounts');"
+                ],
+                "name": "itemtap",
+                "designer|targetType": "Ext.dataview.DataView",
+                "designer|controlQuery": "dataview#accounts"
+            },
+            "designerId": "8e5c81ce-87f6-40b5-b6c8-e2daab7da1bb"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "accounts",
+                "fn": "showAccounts",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    accounts = Ext.create('FP.view.Accounts');",
+                    "",
+                    "main.query('#addUser')[0].show();",
+                    "main.query('#toolbar')[0].setTitle('Users');",
+                    "main.query('#menuButton')[0].show();",
+                    "main.query('#back')[0].hide();",
+                    "main.query('#editUser')[0].hide();",
+                    "",
+                    "",
+                    "main.setActiveItem(accounts);"
+                ]
+            },
+            "designerId": "f21f9050-4eda-4c9d-a6b3-ca12043fa07b"
+        }
+    ]
+}

@@ -1,0 +1,172 @@
+{
+    "type": "Ext.form.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "itemId": "userAccountForm",
+        "designer|userClassName": "UserAccountForm"
+    },
+    "designerId": "e037b4ff-2e20-4e18-b3c4-702b35458a4b",
+    "cn": [
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "userAccountSet",
+                "title": ""
+            },
+            "designerId": "b4c892c5-8f37-4819-8e3c-4b3cd419219b",
+            "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "name",
+                        "label": null,
+                        "name": "name",
+                        "autoCapitalize": true,
+                        "placeHolder": "Account Name"
+                    },
+                    "designerId": "acaa567d-24fe-4e41-a3eb-bfe8c871386e"
+                },
+                {
+                    "type": "Ext.field.Select",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "type",
+                        "label": null,
+                        "name": "type",
+                        "placeHolder": "Account Type",
+                        "autoSelect": false,
+                        "options": [
+                            "[",
+                            "    {text: \"Cash\", value: \"Cash Account\"},",
+                            "    {text: \"Savings\", value: \"Savings Account\"},",
+                            "    {text: \"Credit\", value: \"Credit Account\"},",
+                            "    {text: \"Loan\", value: \"Loan Account\"}",
+                            "]"
+                        ]
+                    },
+                    "designerId": "77612000-1ef7-4318-bd72-85946f5f5bd9"
+                },
+                {
+                    "type": "Ext.field.Number",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "interestRate",
+                        "label": null,
+                        "name": "interestRate",
+                        "placeHolder": "Interest Rate"
+                    },
+                    "designerId": "0b628ecf-477a-4b11-b3b3-791d29be578f"
+                },
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "term",
+                        "label": null,
+                        "name": "term",
+                        "placeHolder": "Term"
+                    },
+                    "designerId": "679f2099-9f69-46e1-a55e-1249029e944d"
+                },
+                {
+                    "type": "Ext.field.Hidden",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "account_id",
+                        "name": "account_id"
+                    },
+                    "designerId": "7aaa79d4-bef2-4c25-87ba-e52da631583f"
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "19c29a02-df2b-4d0e-bcee-2e11202690e0"
+                },
+                {
+                    "type": "Ext.Container",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "container|align": "center",
+                        "container|pack": "center",
+                        "padding": 20,
+                        "width": null,
+                        "designer|displayName": "button container",
+                        "layout": "vbox"
+                    },
+                    "designerId": "80c7bb45-bc57-473a-b3ae-331afe24e36f",
+                    "cn": [
+                        {
+                            "type": "Ext.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "itemId": "saveUserAccount",
+                                "ui": "confirm",
+                                "width": 200,
+                                "iconCls": "bookmarks",
+                                "text": "Save User"
+                            },
+                            "designerId": "f4719ad9-20e0-40b6-915d-91429001cdf3"
+                        },
+                        {
+                            "type": "Ext.Button",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "margin": "10 0 0 0",
+                                "width": 200,
+                                "iconCls": "trash",
+                                "text": "Delete User"
+                            },
+                            "designerId": "f0b6b5f1-2e27-48e4-8d2f-2d2b0b710de3"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

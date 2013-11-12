@@ -1,0 +1,189 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "models": [
+            "Account",
+            "UserAccount",
+            "AccountBalance"
+        ],
+        "stores": [
+            "Accounts",
+            "UserAccounts",
+            "AccountBalance"
+        ],
+        "views": [
+            "Master",
+            "Accounts",
+            "UserAccounts",
+            "AccountBalance",
+            "AccountForm",
+            "UserAccountForm",
+            "AccountBalanceForm",
+            "datetime1",
+            "DateTime"
+        ],
+        "requires": [
+            "FP.config.Runtime",
+            "Ext.DateExtras"
+        ],
+        "controllers": [
+            "Master",
+            "AccountBalance",
+            "Accounts",
+            "AccountForm",
+            "UserAccounts",
+            "UserAccountForm",
+            "AccountBalanceForm"
+        ],
+        "name": "FP"
+    },
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "launch",
+                "implHandler": [
+                    "if(Ext.os.is.iOS) {",
+                    "",
+                    "    if(parseFloat(device.version) >= 7.0) {",
+                    "",
+                    "        Ext.Viewport.setMargin('20 0 0 0');",
+                    "        Ext.Viewport.setHeight(Ext.Viewport.getWindowHeight() - 20);",
+                    "        var body = Ext.DomQuery.select('body')[0];",
+                    "        var html = Ext.DomQuery.select('html')[0];",
+                    "        body.style.backgroundColor = '#1468A2';",
+                    "        html.style.backgroundColor = '#1468A2';",
+                    "    }",
+                    "}"
+                ]
+            },
+            "designerId": "afc56c96-7a39-4165-ad45-36f073d47c29"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "calculateBalance",
+                "implHandler": [
+                    "var store = Ext.getStore('accountBalance'),",
+                    "    records = store.data.items,",
+                    "    total = 0;",
+                    "",
+                    "",
+                    "for(var i = 0; i < records.length; i++) {",
+                    "",
+                    "    total += records[i].data.amount;",
+                    "",
+                    "}",
+                    "",
+                    "",
+                    "return total;"
+                ]
+            },
+            "designerId": "424a780a-39e1-41ec-869b-8875682c21c5"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "updateNumberOfAccounts",
+                "implHandler": [
+                    "var store = Ext.getStore('userAccounts'),",
+                    "    number = store.data.length,",
+                    "    userId = FP.config.Runtime.getUserAccount().account_id;",
+                    "",
+                    "console.log(number+' '+userId);",
+                    "",
+                    "var accounts = Ext.getStore('accounts'),",
+                    "    index = accounts.findExact('id', userId);",
+                    "user = accounts.getAt(index);",
+                    "",
+                    "console.log(index);",
+                    "user.set('accounts', number);",
+                    "accounts.sync();"
+                ]
+            },
+            "designerId": "de2aca03-5e75-41c0-a3d9-da124af50132"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "takePicture",
+                "implHandler": [
+                    "/****",
+                    "* Phonegap specific code",
+                    "* Camera Capture",
+                    "*",
+                    "***/",
+                    "var me = this;",
+                    "var settings = {",
+                    "    quality: 90,",
+                    "    sourceType : Camera.PictureSourceType.PHOTOLIBRARY,",
+                    "    encodingType: Camera.EncodingType.JPEG,",
+                    "    destinationType: Camera.DestinationType.DATA_URL,",
+                    "    saveToPhotoAlbum: false,",
+                    "    allowEdit : true,",
+                    "    targetWidth: 640,",
+                    "    targetHeight: 640,",
+                    "    correctOrientation: true",
+                    "};",
+                    "",
+                    "",
+                    "navigator.camera.getPicture(onSuccess, onFail, settings);",
+                    "",
+                    "function onSuccess(imageData) {",
+                    "    ",
+                    "    //console.log(imageData);",
+                    "    return 'data:image/jpeg;base64,'+imageData;",
+                    "    ",
+                    "}",
+                    "",
+                    "function onFail(message) {",
+                    "    //alert('Failed because: ' + message);",
+                    "    //dataview.show();",
+                    "}"
+                ]
+            },
+            "designerId": "c4e9f4c3-0900-4dd2-8bd3-eccdc82c0cb6"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "deleteUser",
+                "designer|params": [
+                    "id"
+                ]
+            },
+            "designerId": "46893bc8-be47-4bae-bceb-2dc9bf489112"
+        }
+    ]
+}

@@ -1,0 +1,163 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "AccountBalance"
+    },
+    "designerId": "91ab226e-245b-4633-92ef-68992c3658a5",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceShow",
+                "implHandler": [
+                    "var store = Ext.getStore('accountBalance'),",
+                    "    records = store.data.items,",
+                    "    balanceDisplay = Ext.ComponentQuery.query('#balanceDisplay')[0],",
+                    "    total = FP.app.calculateBalance(),",
+                    "    display = Math.abs(total).toFixed(2);",
+                    "",
+                    "balanceDisplay.setHtml(this.displayBalance(total, display));",
+                    "",
+                    ""
+                ],
+                "name": "show",
+                "designer|targetType": "Ext.Container",
+                "designer|controlQuery": "container#accountBalance"
+            },
+            "designerId": "4d75351e-dcd6-4602-a53d-547f5c1f85cc"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "accountBalance",
+                "fn": "showAccountBalance",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    accountBalance = Ext.create('FP.view.AccountBalance'),",
+                    "    back = main.query('#back')[0],",
+                    "    runtime = FP.config.Runtime,",
+                    "    toolbar = main.query('#toolbar')[0],",
+                    "    record = runtime.getUserAccount(),",
+                    "    accountName = main.query('#accountName')[0];",
+                    "",
+                    "",
+                    "back.view = '#accountBalance';",
+                    "",
+                    "toolbar.setTitle(record.name);",
+                    "",
+                    "var store = Ext.getStore('accountBalance');",
+                    "store.clearFilter();",
+                    "store.filter('userAccount_id', record.id, false, true);",
+                    "",
+                    "",
+                    "accountName.setHtml('<b>'+record.name+'</b>');",
+                    "main.setActiveItem(accountBalance);"
+                ]
+            },
+            "designerId": "08ccb1a3-9e97-424b-aecd-c85477352463"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceDeactivate",
+                "implHandler": [
+                    "var main = Ext.getCmp('main');",
+                    "",
+                    "main.query('#accountInfo')[0].hide();"
+                ],
+                "name": "deactivate",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#accountBalance"
+            },
+            "designerId": "220873df-b45e-4405-9408-024bfb620e1a"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceInitialize",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    accountMenu = main.query('#accountMenu')[0];",
+                    "",
+                    "//accountMenu.hide();",
+                    "",
+                    "component.setScrollable({ directionLock: true, scroll: 'vertical' });",
+                    "",
+                    "// List spacer for bottom toolbar.",
+                    "component.add({xtype:'component', height:40, scrollDock: 'bottom'});"
+                ],
+                "name": "initialize",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#accountBalance"
+            },
+            "designerId": "76c377fb-4d17-4ca1-804e-b40316d8edc8"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceActivate",
+                "implHandler": [
+                    "Ext.ComponentQuery.query('#accountInfo')[0].show();"
+                ],
+                "name": "activate",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#accountBalance"
+            },
+            "designerId": "19a5f8ab-2604-480a-9907-2a008a995d68"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "displayBalance",
+                "designer|params": [
+                    "total, display"
+                ],
+                "implHandler": [
+                    "if(total < 0) {",
+                    "    return 'Balance: <span class=\"negative\">($'+display+')</span>';",
+                    "} else if(total > 0) {",
+                    "    return 'Balance: <span class=\"positive\">$'+display+'</span>';",
+                    "} else if(total === 0) {",
+                    "    return 'Balance: <span class=\"zero\">$'+display+'</span>';",
+                    "}"
+                ]
+            },
+            "designerId": "ad2e69c4-158a-4e32-8b18-a5cbeb56214e"
+        }
+    ]
+}

@@ -1,0 +1,129 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "UserAccountForm"
+    },
+    "designerId": "85935643-5aa8-4231-9085-1d6dc9bcfa4d",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSaveUserAccountTap",
+                "implHandler": [
+                    "var account = Ext.ComponentQuery.query('#userAccountForm')[0],",
+                    "    accountValues = account.getValues(),",
+                    "    store = Ext.getStore('userAccounts'),",
+                    "    model = Ext.create('FP.model.UserAccount', accountValues),",
+                    "    errorMessage,",
+                    "    errors = model.validate();",
+                    "",
+                    "",
+                    "if(account.edit) {",
+                    "    // get record in local storage and set new values and sync...",
+                    "    var id = FP.config.Runtime.getUserAccount().userAccountId,",
+                    "        index = store.findExact('id', id),",
+                    "        record = store.getAt(index);",
+                    "",
+                    "    //record.set('firstName', accountValues.firstName);",
+                    "    //record.set('lastName', accountValues.lastName);",
+                    "",
+                    "    //store.sync();",
+                    "    //this.redirectTo('accounts');",
+                    "",
+                    "",
+                    "} else {",
+                    "",
+                    "    if(!errors.isValid()) {",
+                    "        errors.each(function(err) {",
+                    "            errorMessage += err.getMessage() + '\\n';",
+                    "        });",
+                    "",
+                    "        alert('Work in progress'+errorMessage);",
+                    "        console.log(errorMessage);",
+                    "",
+                    "    } else {",
+                    "",
+                    "        model.set('balance', 0);",
+                    "        store.add(model);",
+                    "        store.sync();",
+                    "        FP.config.Runtime.setUserAccount(model.data);",
+                    "        FP.app.updateNumberOfAccounts();",
+                    "        this.redirectTo('userAccounts');",
+                    "    }",
+                    "}"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#saveUserAccount"
+            },
+            "designerId": "e7ca417b-9d63-421a-8de6-71ee969289e2"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "userAccountForm",
+                "fn": "showUserAccountForm",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    addUserAccount = Ext.create('FP.view.UserAccountForm'),",
+                    "    back = main.query('#back')[0];",
+                    "",
+                    "back.view = '#userAccountForm';",
+                    "back.show();",
+                    "",
+                    "main.setActiveItem(addUserAccount);"
+                ]
+            },
+            "designerId": "d79ed70e-9ee8-4b0e-b89c-0983b5927024"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "userAccountForm/edit",
+                "fn": "showUserAccountFormEdit",
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "5c4764ad-4e69-4e68-ba49-bb13491c9f32"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccount_idInitialize",
+                "implHandler": [
+                    "component.setValue(FP.config.Runtime.getAccount().id);"
+                ],
+                "name": "initialize",
+                "designer|targetType": "Ext.field.Hidden",
+                "designer|controlQuery": "hiddenfield#account_id"
+            },
+            "designerId": "a547e4a7-391c-4aab-a35e-0de81dc61ec5"
+        }
+    ]
+}

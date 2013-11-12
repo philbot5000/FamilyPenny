@@ -1,0 +1,133 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "UserAccounts"
+    },
+    "designerId": "cf4c2b5c-1084-4104-89d4-efaa69d8666f",
+    "cn": [
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "userAccounts",
+                "fn": "showUserAccounts",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    record = FP.config.Runtime.getAccount(),",
+                    "    userAccounts = Ext.create('FP.view.UserAccounts'),",
+                    "    back = main.query('#back')[0],",
+                    "    menuButton = main.query('#menuButton')[0],",
+                    "    addUserButton = main.query('#addUser')[0],",
+                    "    editUserButton = main.query('#editUser')[0],",
+                    "    toolbar = main.query('#toolbar')[0];",
+                    "",
+                    "toolbar.setTitle(record.firstName);",
+                    "",
+                    "back.view = '#userAccounts';",
+                    "back.show();",
+                    "editUserButton.setText('Edit');",
+                    "editUserButton.show();",
+                    "menuButton.hide();",
+                    "addUserButton.hide();",
+                    "",
+                    "main.setActiveItem(userAccounts);"
+                ]
+            },
+            "designerId": "3f99a19b-5c6f-4ac5-88c5-2b8f49b142c8"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUserAccountsItemTap",
+                "implHandler": [
+                    "FP.config.Runtime.setUserAccount(record.data);",
+                    "this.redirectTo('accountBalance');"
+                ],
+                "name": "itemtap",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#userAccounts"
+            },
+            "designerId": "485c7548-aea4-4260-9029-d1d236d89202"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUserAccountsInitialize",
+                "implHandler": [
+                    "component.setScrollable({ directionLock: true, scroll: 'vertical' });",
+                    "",
+                    "// List spacer for bottom toolbar.",
+                    "component.add({xtype:'component', height:60, scrollDock: 'bottom'});"
+                ],
+                "name": "initialize",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#userAccounts"
+            },
+            "designerId": "5191d980-1e5d-4792-aa7d-b2613baaf700"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUserAccountsDeactivate",
+                "implHandler": [
+                    "var main = Ext.getCmp('main');",
+                    "",
+                    "//main.query('#accountMenu')[0].hide();",
+                    ""
+                ],
+                "name": "deactivate",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#userAccounts"
+            },
+            "designerId": "29faac6d-388a-41dd-862c-e01df044ee3c"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onUserAccountsShow",
+                "implHandler": [
+                    "/*component.on('hide', function() {",
+                    "setTimeout(function() {",
+                    "component.destroy();",
+                    "}, 1000);",
+                    "});",
+                    "*/",
+                    "Ext.ComponentQuery.query('#accountMenu')[0].show();"
+                ],
+                "name": "show",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#userAccounts"
+            },
+            "designerId": "1187a824-4ed3-4f81-a25e-f2dfa1382fd7"
+        }
+    ]
+}

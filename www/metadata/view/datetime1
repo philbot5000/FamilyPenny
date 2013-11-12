@@ -1,0 +1,445 @@
+{
+    "type": "Ext.picker.Picker",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "border": null,
+        "cls": [
+            "dateTimePicker"
+        ],
+        "height": 135,
+        "hidden": true,
+        "itemId": "dateTimePicker",
+        "style": "-webkit-box-shadow: 0px 0px 50px rgba(0,0,0,0.6);",
+        "ui": "",
+        "width": null,
+        "designer|userClassName": "datetime1",
+        "designer|userAlias": "dateTimePicker",
+        "hideOnMaskTap": true,
+        "scrollable": null
+    },
+    "designerId": "8b808b8e-3d7f-49f9-9f82-a690ec46c9eb",
+    "cn": [
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "doneButton",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "hidden": false,
+                "itemId": "datePickerDoneButton",
+                "ui": "plain",
+                "text": "Done"
+            },
+            "designerId": "efcacf42-cae0-467c-805e-c66aa7e86725"
+        },
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "cancelButton",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "docked": null,
+                "hidden": false,
+                "ui": "plain",
+                "text": "Cancel"
+            },
+            "designerId": "704e7d57-67d4-4f45-9b90-e4da2b2a12e1"
+        },
+        {
+            "type": "Ext.picker.Slot",
+            "reference": {
+                "name": "slots",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "[",
+                    "    {\"text\":\"Jan\",\"value\":0},",
+                    "    {\"text\":\"Feb\",\"value\":1},",
+                    "\t{\"text\":\"Mar\",\"value\":2},",
+                    "    {\"text\":\"Apr\",\"value\":3},",
+                    "    {\"text\":\"May\",\"value\":4},",
+                    "    {\"text\":\"Jun\",\"value\":5},",
+                    "    {\"text\":\"Jul\",\"value\":6},",
+                    "    {\"text\":\"Aug\",\"value\":7},",
+                    "    {\"text\":\"Sep\",\"value\":8},",
+                    "    {\"text\":\"Oct\",\"value\":9},",
+                    "    {\"text\":\"Nov\",\"value\":10},",
+                    "    {\"text\":\"Dec\",\"value\":11}",
+                    "]"
+                ],
+                "itemId": "monthPickerSlot",
+                "maxWidth": null,
+                "minWidth": null,
+                "padding": null,
+                "style": null,
+                "width": null,
+                "align": "right",
+                "name": "month",
+                "title": ""
+            },
+            "designerId": "9083b911-119d-4b6d-809e-1284716b8cdc",
+            "cn": [
+                {
+                    "type": "basiceventbinding",
+                    "reference": {
+                        "name": "listeners",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "onMonthPickerSlotpick",
+                        "implHandler": [
+                            "//auto fill the days to match selected month of current year",
+                            "var monthPickerSlot = Ext.ComponentQuery.query('#monthPickerSlot')[0],",
+                            "    month = monthPickerSlot.selectedIndex + 1;",
+                            "",
+                            "var dayPickerSlot = Ext.ComponentQuery.query('#dayPickerSlot')[0];",
+                            "",
+                            "",
+                            "function daysInMonth(month) ",
+                            "{",
+                            "",
+                            "    return new Date(new Date().getFullYear(), month, 0).getDate();",
+                            "}",
+                            "",
+                            "var days = daysInMonth(month),",
+                            "    dayPickerSlotDataArray = [];",
+                            "",
+                            "for (var i = 1; i <= days; i ++)",
+                            "{",
+                            "    var data  = {",
+                            "        \"text\": i,",
+                            "        \"value\": i",
+                            "    };",
+                            "",
+                            "    dayPickerSlotDataArray.push(data);",
+                            "}",
+                            "",
+                            "//explination: setData() alone doesn't work, getStore().setData() seems to fix the problem",
+                            "dayPickerSlot.getStore().setData();",
+                            "",
+                            "dayPickerSlot.setData(dayPickerSlotDataArray);",
+                            ""
+                        ],
+                        "name": "slotpick"
+                    },
+                    "designerId": "303cbbe9-bd3a-491d-8158-0d33a890016a"
+                }
+            ]
+        },
+        {
+            "type": "Ext.picker.Slot",
+            "reference": {
+                "name": "slots",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "[",
+                    "    {\"text\":\"1\",\"value\":1},",
+                    "    {\"text\":\"2\",\"value\":2},",
+                    "    {\"text\":\"3\",\"value\":3},",
+                    "    {\"text\":\"4\",\"value\":4},",
+                    "    {\"text\":\"5\",\"value\":5},",
+                    "    {\"text\":\"6\",\"value\":6},",
+                    "    {\"text\":\"7\",\"value\":7},",
+                    "    {\"text\":\"8\",\"value\":8},",
+                    "    {\"text\":\"9\",\"value\":9},",
+                    "    {\"text\":\"10\",\"value\":10},",
+                    "    {\"text\":\"11\",\"value\":11},",
+                    "    {\"text\":\"12\",\"value\":12},",
+                    "    {\"text\":\"13\",\"value\":13},",
+                    "    {\"text\":\"14\",\"value\":14},",
+                    "    {\"text\":\"15\",\"value\":15},",
+                    "    {\"text\":\"16\",\"value\":16},",
+                    "    {\"text\":\"17\",\"value\":17},",
+                    "    {\"text\":\"18\",\"value\":18},",
+                    "    {\"text\":\"19\",\"value\":19},",
+                    "    {\"text\":\"20\",\"value\":20},",
+                    "    {\"text\":\"21\",\"value\":21},",
+                    "    {\"text\":\"22\",\"value\":22},",
+                    "    {\"text\":\"23\",\"value\":23},",
+                    "    {\"text\":\"24\",\"value\":24},",
+                    "    {\"text\":\"25\",\"value\":25},",
+                    "    {\"text\":\"26\",\"value\":26},",
+                    "    {\"text\":\"27\",\"value\":27},",
+                    "    {\"text\":\"28\",\"value\":28},",
+                    "    {\"text\":\"29\",\"value\":29},",
+                    "    {\"text\":\"30\",\"value\":30},",
+                    "    {\"text\":\"31\",\"value\":31}",
+                    "]"
+                ],
+                "hidden": false,
+                "itemId": "dayPickerSlot",
+                "minWidth": null,
+                "width": null,
+                "name": "day",
+                "title": "dd"
+            },
+            "designerId": "ce04b90f-d02b-4ddc-b9bd-e2a5c4656850"
+        },
+        {
+            "type": "Ext.picker.Slot",
+            "reference": {
+                "name": "slots",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "[",
+                    "    {\"text\":\"12\",\"value\":0},",
+                    "    {\"text\":\"01\",\"value\":1},",
+                    "    {\"text\":\"02\",\"value\":2},",
+                    "    {\"text\":\"03\",\"value\":3},",
+                    "    {\"text\":\"04\",\"value\":4},",
+                    "    {\"text\":\"05\",\"value\":5},",
+                    "    {\"text\":\"06\",\"value\":6},",
+                    "    {\"text\":\"07\",\"value\":7},",
+                    "    {\"text\":\"08\",\"value\":8},",
+                    "    {\"text\":\"09\",\"value\":9},",
+                    "    {\"text\":\"10\",\"value\":10},",
+                    "    {\"text\":\"11\",\"value\":11}",
+                    "]"
+                ],
+                "itemId": "hourPickerSlot",
+                "minWidth": null,
+                "align": "right",
+                "name": "hour",
+                "title": "hh"
+            },
+            "designerId": "83b8342c-4607-457e-8e63-0a24315bf344"
+        },
+        {
+            "type": "Ext.picker.Slot",
+            "reference": {
+                "name": "slots",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "[",
+                    "    {\"text\":\"00\",\"value\":00},",
+                    "    {\"text\":\"05\",\"value\":05},",
+                    "    {\"text\":\"10\",\"value\":10},",
+                    "    {\"text\":\"15\",\"value\":15},",
+                    "    {\"text\":\"20\",\"value\":20},",
+                    "    {\"text\":\"25\",\"value\":25},",
+                    "    {\"text\":\"30\",\"value\":30},",
+                    "    {\"text\":\"35\",\"value\":35},",
+                    "    {\"text\":\"40\",\"value\":40},",
+                    "    {\"text\":\"45\",\"value\":45},",
+                    "    {\"text\":\"50\",\"value\":50},",
+                    "    {\"text\":\"55\",\"value\":55}",
+                    "]"
+                ],
+                "itemId": "minutePickerSlot",
+                "align": "center",
+                "name": "minute",
+                "title": "mm"
+            },
+            "designerId": "7a71bbc2-a138-47e2-8b81-9eedcad7928a"
+        },
+        {
+            "type": "Ext.picker.Slot",
+            "reference": {
+                "name": "slots",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "data": [
+                    "[",
+                    "    {\"text\":\"AM\",\"value\":0},",
+                    "    {\"text\":\"PM\",\"value\":1}",
+                    "]"
+                ],
+                "itemId": "ampmPickerSlot",
+                "minWidth": null,
+                "padding": null,
+                "width": null,
+                "align": null,
+                "name": "ampm",
+                "title": "ampm"
+            },
+            "designerId": "d4325508-e0c6-44a6-ab50-4f598971d0e7"
+        },
+        {
+            "type": "Ext.Toolbar",
+            "reference": {
+                "name": "toolbar",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "cls": [
+                    "blue"
+                ],
+                "docked": "top",
+                "hidden": false,
+                "designer|displayName": "dateTimePickerToolbar"
+            },
+            "designerId": "fad0937e-9bfc-42db-9e12-c1a1eb9f703e",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "doneButton",
+                        "ui": "plain",
+                        "designer|displayName": "done",
+                        "text": "Done"
+                    },
+                    "designerId": "2c508b97-2162-4935-8362-3959097439df",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onDoneButtonTap",
+                                "implHandler": [
+                                    "var selectedMonth = Ext.ComponentQuery.query('#monthPickerSlot')[0].selectedIndex,",
+                                    "    selectedDay = Ext.ComponentQuery.query('#dayPickerSlot')[0].selectedIndex + 1,",
+                                    "    selectedHour = Ext.ComponentQuery.query('#hourPickerSlot')[0].selectedIndex,",
+                                    "    selectedAmpm = Ext.ComponentQuery.query('#ampmPickerSlot')[0].selectedIndex,",
+                                    "    studyGroupDateTimeSelector = Ext.ComponentQuery.query('#studyGroupDateTimeSelector')[0],",
+                                    "    currentYear = new Date().getFullYear();",
+                                    "",
+                                    "//a bug requires this next step in order to retrieve the correct value from the ",
+                                    "var minutePickerSlot = Ext.ComponentQuery.query('#minutePickerSlot')[0],",
+                                    "    minutePickerSlotData = minutePickerSlot.getStore().data.all,",
+                                    "    selectedMinuteIndex = minutePickerSlot.selectedIndex,",
+                                    "    selectedMinute = minutePickerSlotData[selectedMinuteIndex].data.value;",
+                                    "",
+                                    "//apply am/pm condition to the hour",
+                                    "if (selectedAmpm === 1) ",
+                                    "{",
+                                    "    selectedHour += 12;",
+                                    "}",
+                                    "",
+                                    "var selectedDate = new Date(currentYear, selectedMonth, selectedDay, selectedHour, selectedMinute);",
+                                    "",
+                                    "studyGroupDateTimeSelector.setValue(selectedDate.toDateString() + ' ' + selectedDate.toLocaleTimeString());",
+                                    "this.hide();"
+                                ],
+                                "name": "tap"
+                            },
+                            "designerId": "6d8ef397-8238-41f5-b859-7361be7180ef"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.Spacer",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "designerId": "59881176-8732-4f99-b544-0e8c559dcc71"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDateTimePickerShow",
+                "implHandler": [
+                    "this.on('hide', function() {",
+                    "",
+                    "    var studyGroupCreator = Ext.ComponentQuery.query('#courseDashboardStudyGroupCreator')[0],",
+                    "        monthPickerSlot = Ext.ComponentQuery.query('#monthPickerSlot')[0],",
+                    "        dayPickerSlot = Ext.ComponentQuery.query('#dayPickerSlot')[0],",
+                    "        selectedHour = Ext.ComponentQuery.query('#hourPickerSlot')[0].selectedIndex,",
+                    "        selectedAmpm = Ext.ComponentQuery.query('#ampmPickerSlot')[0].selectedIndex,",
+                    "        studyGroupDateTimeSelector = Ext.ComponentQuery.query('#studyGroupDateTimeSelector')[0],        ",
+                    "        currentDate = new Date();",
+                    "",
+                    "    //a bug requires this next step in order to retrieve the correct value from the ",
+                    "    var minutePickerSlot = Ext.ComponentQuery.query('#minutePickerSlot')[0],",
+                    "        minutePickerSlotData = minutePickerSlot.getStore().data.all,",
+                    "        selectedMinuteIndex = minutePickerSlot.selectedIndex,",
+                    "        selectedMinute = minutePickerSlotData[selectedMinuteIndex].data.value;",
+                    "",
+                    "    //apply am/pm condition to the hour",
+                    "    if (selectedAmpm === 1) ",
+                    "    {",
+                    "        selectedHour += 12;",
+                    "    }",
+                    "",
+                    "    var selectedDate = new Date(currentDate.getFullYear(), monthPickerSlot.selectedIndex, dayPickerSlot.selectedIndex + 1, selectedHour, selectedMinute);",
+                    "",
+                    "    //set the date to the selector field",
+                    "    studyGroupCreator.date = selectedDate;",
+                    "",
+                    "    studyGroupDateTimeSelector.setValue(Ext.Date.format(selectedDate, 'l F j g:i A'));",
+                    "    this.destroy();",
+                    "});"
+                ],
+                "name": "show"
+            },
+            "designerId": "372243ba-4cf3-443d-bb1d-6620166d1dc3"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDateTimePickerPainted",
+                "implHandler": [
+                    "var monthPickerSlot = Ext.ComponentQuery.query('#monthPickerSlot')[0],",
+                    "    dayPickerSlot = Ext.ComponentQuery.query('#dayPickerSlot')[0],",
+                    "    hourPickerSlot = Ext.ComponentQuery.query('#hourPickerSlot')[0],",
+                    "    minutePickerSlot = Ext.ComponentQuery.query('#minutePickerSlot')[0],",
+                    "    ampmPickerSlot = Ext.ComponentQuery.query('#ampmPickerSlot')[0],",
+                    "    currentDate = new Date();",
+                    "",
+                    "//set the value of the slots to today's date",
+                    "monthPickerSlot.setValue(currentDate.getMonth());",
+                    "dayPickerSlot.setValue(currentDate.getUTCDate());",
+                    "minutePickerSlot.setValue(currentDate.getMinutes());",
+                    "",
+                    "if (currentDate.getHours() > 12) ",
+                    "{",
+                    "    hourPickerSlot.setValue(currentDate.getHours()-12);",
+                    "    ampmPickerSlot.setValue(1);",
+                    "",
+                    "} else",
+                    "{",
+                    "    hourPickerSlot.setValue(currentDate.getHours());",
+                    "    ampmPickerSlot.setValue(0);",
+                    "}"
+                ],
+                "name": "painted"
+            },
+            "designerId": "3dd7a80a-d2c3-4d93-9091-89d9b4276de2"
+        }
+    ]
+}

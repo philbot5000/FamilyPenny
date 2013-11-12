@@ -1,0 +1,89 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "identifier": "uuid",
+        "designer|userClassName": "UserAccount"
+    },
+    "configAlternates": {
+        "identifier": "string"
+    },
+    "designerId": "5dfc4a0f-00ac-4cc1-a683-cd9e9a4facf0",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "id"
+            },
+            "designerId": "ebe6f0a3-dd8a-468f-a787-801a88cb6baa"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "account_id"
+            },
+            "designerId": "59905d5e-d1fb-410a-a12d-7bedda91a198"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "type"
+            },
+            "designerId": "543d6c3a-f77e-44ad-9f94-0a37d32a72c1"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "name"
+            },
+            "designerId": "1ebf1436-95c3-43bc-965d-2779f4cb86f2"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "defaultValue": null,
+                "name": "balance",
+                "type": "float"
+            },
+            "designerId": "f31a87eb-aac5-4345-afd5-5fa4ed62ad8c"
+        },
+        {
+            "type": "Ext.data.proxy.LocalStorage",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "aea71440-aec2-45a2-9350-92dc18d15337"
+        }
+    ]
+}

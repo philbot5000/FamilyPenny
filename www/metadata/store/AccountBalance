@@ -1,0 +1,67 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "model": "AccountBalance",
+        "storeId": "accountBalance",
+        "designer|userClassName": "AccountBalance"
+    },
+    "designerId": "9d6e46e0-8b68-4890-8f44-eadab5958bea",
+    "cn": [
+        {
+            "type": "Ext.util.Grouper",
+            "reference": {
+                "name": "grouper",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "direction": "DESC",
+                "property": "displayDate",
+                "root": null,
+                "sortProperty": "date"
+            },
+            "designerId": "5520c60e-0a06-432c-92a4-39b01c60bd17",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "groupFn",
+                        "designer|params": [
+                            "item"
+                        ],
+                        "implHandler": [
+                            "console.log(item);",
+                            "",
+                            "return 'hey';"
+                        ]
+                    },
+                    "designerId": "aea32a0d-2955-4342-9f0c-c3662ba3d2cf"
+                }
+            ]
+        },
+        {
+            "type": "Ext.util.Sorter",
+            "reference": {
+                "name": "sorters",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "direction": "DESC",
+                "property": "date"
+            },
+            "designerId": "35ee46b9-24fa-412c-b491-bb2993c1c9bc"
+        }
+    ]
+}

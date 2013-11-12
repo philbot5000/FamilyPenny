@@ -1,0 +1,89 @@
+{
+    "type": "Ext.dataview.DataView",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "hidden": true,
+        "hideAnimation": null,
+        "itemId": "accounts",
+        "padding": 10,
+        "showAnimation": null,
+        "style": "background: #fff;",
+        "designer|userClassName": "Accounts",
+        "designer|userAlias": "accounts",
+        "scrollable": [
+            "{ directionLock: true, scroll: 'vertical' }"
+        ],
+        "deferEmptyText": false,
+        "emptyText": "Add users",
+        "pressedCls": "fp-item-pressed",
+        "store": "accounts"
+    },
+    "configAlternates": {
+        "scrollable": "object",
+        "showAnimation": "object",
+        "hideAnimation": "object"
+    },
+    "designerId": "0bcf733f-9ece-4e16-851a-d6643b91153e",
+    "cn": [
+        {
+            "type": "Ext.XTemplate",
+            "reference": {
+                "name": "itemTpl",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "implHandler": [
+                    "<div class=\"account\">",
+                    "    <img src=\"images/user.png\" class=\"user-image\" />",
+                    "    <span class=\"account-name\">{firstName} {lastName}</span><br />",
+                    "    <span>Accounts: {accounts}</span>",
+                    "</div>"
+                ],
+                "designer|displayName": "itemTpl"
+            },
+            "designerId": "dbcf73fe-69f3-436c-84ce-e14879014b8d"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountsDeactivate",
+                "implHandler": [
+                    "/*setTimeout(function() {",
+                    "oldActiveItem.destroy();",
+                    "},1000);*/",
+                    ""
+                ],
+                "name": "deactivate"
+            },
+            "designerId": "108347d6-ad8c-421f-928d-ef337622214a"
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountsActivate",
+                "implHandler": [
+                    "var store = Ext.getStore('userAccounts');",
+                    "",
+                    "store.clearFilter();"
+                ],
+                "name": "activate"
+            },
+            "designerId": "f6a3e834-2886-4695-b32e-b0a6497fb26d"
+        }
+    ]
+}

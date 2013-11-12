@@ -1,0 +1,29 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "model": "UserAccount",
+        "storeId": "userAccounts",
+        "designer|userClassName": "UserAccounts"
+    },
+    "designerId": "663cb9a0-1fd7-40e5-a16b-e750768fb603",
+    "cn": [
+        {
+            "type": "Ext.util.Grouper",
+            "reference": {
+                "name": "grouper",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "property": "type"
+            },
+            "designerId": "1f40f7a1-5c28-4f85-aea7-412dbb371371"
+        }
+    ]
+}

@@ -1,0 +1,15 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "autoLoad": true,
+        "model": "Account",
+        "storeId": "accounts",
+        "designer|userClassName": "Accounts"
+    },
+    "designerId": "cecfb960-dc32-47e7-9cca-09c58e3a687c"
+}
