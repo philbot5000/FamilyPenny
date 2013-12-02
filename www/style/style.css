@@ -1,3 +1,6 @@
+.x-panel.x-floating {
+    padding: 0px !important;
+}
 .fp-item-pressed {
     opacity: 0.5;
 }
@@ -25,6 +28,11 @@
     
 }
 
+.emptyList {
+    font-size: 2em;
+    display: block;
+    clear: both;
+}
 
 .user-image {
     height: 75px;

@@ -22,43 +22,30 @@
                 "implHandler": [
                     "var account = Ext.ComponentQuery.query('#userAccountForm')[0],",
                     "    accountValues = account.getValues(),",
-                    "    store = Ext.getStore('userAccounts'),",
                     "    model = Ext.create('FP.model.UserAccount', accountValues),",
-                    "    errorMessage,",
+                    "    errorMessage = '',",
                     "    errors = model.validate();",
                     "",
                     "",
-                    "if(account.edit) {",
-                    "    // get record in local storage and set new values and sync...",
-                    "    var id = FP.config.Runtime.getUserAccount().userAccountId,",
-                    "        index = store.findExact('id', id),",
-                    "        record = store.getAt(index);",
                     "",
-                    "    //record.set('firstName', accountValues.firstName);",
-                    "    //record.set('lastName', accountValues.lastName);",
+                    "if(!errors.isValid()) {",
                     "",
-                    "    //store.sync();",
-                    "    //this.redirectTo('accounts');",
+                    "    errors.each(function(err) {",
+                    "        errorMessage += err.getMessage() + '<br />';",
+                    "    });",
                     "",
+                    "    Ext.Msg.alert('User account is invalid', errorMessage);",
                     "",
                     "} else {",
                     "",
-                    "    if(!errors.isValid()) {",
-                    "        errors.each(function(err) {",
-                    "            errorMessage += err.getMessage() + '\\n';",
-                    "        });",
+                    "    if(account.edit) {",
                     "",
-                    "        alert('Work in progress'+errorMessage);",
-                    "        console.log(errorMessage);",
+                    "        this.updateUserAccount(accountValues);",
                     "",
                     "    } else {",
                     "",
-                    "        model.set('balance', 0);",
-                    "        store.add(model);",
-                    "        store.sync();",
-                    "        FP.config.Runtime.setUserAccount(model.data);",
-                    "        FP.app.updateNumberOfAccounts();",
-                    "        this.redirectTo('userAccounts');",
+                    "        this.addUserAccount(accountValues);",
+                    "        ",
                     "    }",
                     "}"
                 ],
@@ -81,11 +68,14 @@
                 "implHandler": [
                     "var main = Ext.getCmp('main'),",
                     "    addUserAccount = Ext.create('FP.view.UserAccountForm'),",
+                    "    set = Ext.ComponentQuery.query('#userAccountSet')[0],",
                     "    back = main.query('#back')[0];",
                     "",
                     "back.view = '#userAccountForm';",
                     "back.show();",
                     "",
+                    "set.setTitle('Add Account');",
+                    "main.query('#accountMenu')[0].hide();",
                     "main.setActiveItem(addUserAccount);"
                 ]
             },
@@ -102,7 +92,27 @@
                 "url": "userAccountForm/edit",
                 "fn": "showUserAccountFormEdit",
                 "implHandler": [
-                    ""
+                    "var main = Ext.getCmp('main'),",
+                    "    addUserAccount = Ext.create('FP.view.UserAccountForm'),",
+                    "    back = main.query('#back')[0],",
+                    "    set = Ext.ComponentQuery.query('#userAccountSet')[0],",
+                    "    type = Ext.ComponentQuery.query('#type')[0],",
+                    "    runtime = FP.config.Runtime,",
+                    "    userAccount = runtime.getUserAccount();",
+                    "",
+                    "",
+                    "addUserAccount.edit = true;",
+                    "addUserAccount.setValues(userAccount);",
+                    "",
+                    "type.setDisabled(true);",
+                    "",
+                    "set.setTitle('Edit Account');",
+                    "",
+                    "main.query('#accountMenu')[0].hide();",
+                    "",
+                    "back.hide();",
+                    "",
+                    "main.setActiveItem(addUserAccount);"
                 ]
             },
             "designerId": "5c4764ad-4e69-4e68-ba49-bb13491c9f32"
@@ -124,6 +134,218 @@
                 "designer|controlQuery": "hiddenfield#account_id"
             },
             "designerId": "a547e4a7-391c-4aab-a35e-0de81dc61ec5"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTypeChange",
+                "implHandler": [
+                    "this.showAccountOptions(newValue);"
+                ],
+                "name": "change",
+                "designer|targetType": "Ext.field.Select",
+                "designer|controlQuery": "selectfield#type"
+            },
+            "designerId": "3f582e6e-660a-4292-a9f3-5115ff660adf"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "resetOldDefaultAccount",
+                "implHandler": [
+                    "// This function is called when a user sets an account to default.",
+                    "// Since there can be only one default account we must set all other accounts for ",
+                    "// this user back to default = false.",
+                    "",
+                    "",
+                    "// find the record that is default (should be only one).",
+                    "// set that record to dafualt false",
+                    "",
+                    "var store = Ext.getStore('userAccounts');",
+                    "",
+                    "store.filter('account_id', FP.config.Runtime.getAccount().id);",
+                    "",
+                    "var index = store.findExact('defaultAccount', true);",
+                    "",
+                    "if(index !== -1) {",
+                    "",
+                    "\tvar record = store.getAt(index);",
+                    "",
+                    "\tconsole.log(record);",
+                    "",
+                    "\trecord.set('defaultAccount', false);",
+                    "}",
+                    "",
+                    "store.clearFilter();"
+                ]
+            },
+            "designerId": "c309b77d-fa17-42fe-9da5-6e163c1c12d0"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "deleteAccount",
+                "designer|params": [
+                    "id"
+                ],
+                "implHandler": [
+                    "// First delete all transactions from AccountBalance store where id = userAccount_id",
+                    "// Once all transactions are deleted remove account where id = id.",
+                    "",
+                    "// Filter store then use each function to iterate over and remove records",
+                    "// ",
+                    "",
+                    "var accountBalanceStore = Ext.getStore('accountBalance'),",
+                    "    index = store.findExact('id', id),",
+                    "    record = store.getAt(index);",
+                    "",
+                    ""
+                ]
+            },
+            "designerId": "9a39424b-14b0-42db-9cec-ae1fc0d47c1f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "showAccountOptions",
+                "designer|params": [
+                    "account"
+                ],
+                "implHandler": [
+                    "//console.log(account);",
+                    "var term = Ext.ComponentQuery.query('#term')[0],",
+                    "    interest = Ext.ComponentQuery.query('#interest')[0],",
+                    "    creditLimit = Ext.ComponentQuery.query('#creditLimit')[0],",
+                    "    loanAmount = Ext.ComponentQuery.query('#loanAmount')[0],",
+                    "    termType = Ext.ComponentQuery.query('radiofield');",
+                    "",
+                    "switch(account) {",
+                    "    case \"Credit Account\":",
+                    "    term.hide();",
+                    "    loanAmount.hide();",
+                    "    creditLimit.show();",
+                    "    interest.show();",
+                    "",
+                    "    break;",
+                    "",
+                    "    case \"Cash Account\":",
+                    "    term.hide();",
+                    "    interest.hide();",
+                    "    loanAmount.hide();",
+                    "    creditLimit.hide();",
+                    "    break;",
+                    "",
+                    "    case \"Savings Account\":",
+                    "    interest.show();",
+                    "    term.hide();",
+                    "    loanAmount.hide();",
+                    "    creditLimit.hide();",
+                    "    break;",
+                    "",
+                    "    case \"Loan Account\":",
+                    "    interest.show();",
+                    "    term.show();",
+                    "    loanAmount.show();",
+                    "    creditLimit.hide();",
+                    "    //amount.show();",
+                    "    break;",
+                    "}",
+                    "",
+                    ""
+                ]
+            },
+            "designerId": "c5729df2-2703-431c-8543-ea54ef190fd8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "addUserAccount",
+                "designer|params": [
+                    "accountValues"
+                ],
+                "implHandler": [
+                    "var store = Ext.getStore('userAccounts'),",
+                    "    model = Ext.create('FP.model.UserAccount', accountValues);",
+                    "",
+                    "",
+                    "if(accountValues.defaultAccount) {",
+                    "    this.resetOldDefaultAccount();",
+                    "}",
+                    "",
+                    "model.set('balance', 0);",
+                    "store.add(model);",
+                    "store.sync();",
+                    "FP.config.Runtime.setUserAccount(model.data);",
+                    "FP.app.updateNumberOfAccounts();",
+                    "this.redirectTo('userAccounts');"
+                ]
+            },
+            "designerId": "e9161305-5778-435b-9b5d-714e992cfd5f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "updateUserAccount",
+                "designer|params": [
+                    "accountValues"
+                ],
+                "implHandler": [
+                    "// get record in local storage and set new values and sync...",
+                    "var id = FP.config.Runtime.getUserAccount().id,",
+                    "    store = Ext.getStore('userAccounts'),",
+                    "    index = store.findExact('id', id),",
+                    "    record = store.getAt(index);",
+                    "",
+                    "//Ext.ComponentQuery.query('#editUser')[0].setText('Edit');",
+                    "//Ext.ComponentQuery.query('#back')[0].show();",
+                    "",
+                    "if(accountValues.defaultAccount) {",
+                    "    this.resetOldDefaultAccount();",
+                    "}",
+                    "",
+                    "record.set('name', accountValues.name);",
+                    "record.set('type', accountValues.type);",
+                    "record.set('interest', accountValues.interest);",
+                    "record.set('term', accountValues.term);",
+                    "record.set('defaultAccount', accountValues.defaultAccount);",
+                    "",
+                    "",
+                    "",
+                    "store.sync();",
+                    "this.redirectTo('accountBalance');"
+                ]
+            },
+            "designerId": "f7ef7757-ee55-424f-9227-62f6a842314e"
         }
     ]
 }

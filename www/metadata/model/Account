@@ -38,7 +38,8 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "firstName"
+                "name": "firstName",
+                "designer|displayName": null
             },
             "designerId": "1804ab40-c1f2-4ca6-a06f-fbcf08d2a040"
         },

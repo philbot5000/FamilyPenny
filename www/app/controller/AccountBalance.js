@@ -28,7 +28,8 @@ Ext.define('FP.controller.AccountBalance', {
             "list#accountBalance": {
                 deactivate: 'onAccountBalanceDeactivate',
                 initialize: 'onAccountBalanceInitialize',
-                activate: 'onAccountBalanceActivate'
+                activate: 'onAccountBalanceActivate',
+                itemtap: 'onAccountBalanceItemTap'
             }
         }
     },
@@ -53,7 +54,8 @@ Ext.define('FP.controller.AccountBalance', {
 
     onAccountBalanceInitialize: function(component, eOpts) {
         var main = Ext.getCmp('main'),
-            accountMenu = main.query('#accountMenu')[0];
+            accountMenu = main.query('#accountMenu')[0],
+            store = component.getStore();
 
         //accountMenu.hide();
 
@@ -61,10 +63,21 @@ Ext.define('FP.controller.AccountBalance', {
 
         // List spacer for bottom toolbar.
         component.add({xtype:'component', height:40, scrollDock: 'bottom'});
+
+        store.clearFilter();
+        store.filter('userAccount_id', FP.config.Runtime.getUserAccount().id, false, true);
     },
 
     onAccountBalanceActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
         Ext.ComponentQuery.query('#accountInfo')[0].show();
+    },
+
+    onAccountBalanceItemTap: function(dataview, index, target, record, e, eOpts) {
+        var runtime = FP.config.Runtime;
+
+        runtime.setTransaction(record.data);
+        console.log(runtime.getTransaction());
+        this.redirectTo('accountBalanceForm/edit');
     },
 
     showAccountBalance: function() {
@@ -77,14 +90,15 @@ Ext.define('FP.controller.AccountBalance', {
             accountName = main.query('#accountName')[0];
 
 
+
+        Ext.ComponentQuery.query('#editUser')[0].setText('Edit');
+        back.show();
+
         back.view = '#accountBalance';
 
         toolbar.setTitle(record.name);
 
-        var store = Ext.getStore('accountBalance');
-        store.clearFilter();
-        store.filter('userAccount_id', record.id, false, true);
-
+        main.query('#accountMenu')[0].show();
 
         accountName.setHtml('<b>'+record.name+'</b>');
         main.setActiveItem(accountBalance);

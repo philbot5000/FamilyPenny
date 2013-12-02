@@ -56,14 +56,15 @@
                     "    accountName = main.query('#accountName')[0];",
                     "",
                     "",
+                    "",
+                    "Ext.ComponentQuery.query('#editUser')[0].setText('Edit');",
+                    "back.show();",
+                    "",
                     "back.view = '#accountBalance';",
                     "",
                     "toolbar.setTitle(record.name);",
                     "",
-                    "var store = Ext.getStore('accountBalance');",
-                    "store.clearFilter();",
-                    "store.filter('userAccount_id', record.id, false, true);",
-                    "",
+                    "main.query('#accountMenu')[0].show();",
                     "",
                     "accountName.setHtml('<b>'+record.name+'</b>');",
                     "main.setActiveItem(accountBalance);"
@@ -102,14 +103,18 @@
                 "fn": "onAccountBalanceInitialize",
                 "implHandler": [
                     "var main = Ext.getCmp('main'),",
-                    "    accountMenu = main.query('#accountMenu')[0];",
+                    "    accountMenu = main.query('#accountMenu')[0],",
+                    "    store = component.getStore();",
                     "",
                     "//accountMenu.hide();",
                     "",
                     "component.setScrollable({ directionLock: true, scroll: 'vertical' });",
                     "",
                     "// List spacer for bottom toolbar.",
-                    "component.add({xtype:'component', height:40, scrollDock: 'bottom'});"
+                    "component.add({xtype:'component', height:40, scrollDock: 'bottom'});",
+                    "",
+                    "store.clearFilter();",
+                    "store.filter('userAccount_id', FP.config.Runtime.getUserAccount().id, false, true);"
                 ],
                 "name": "initialize",
                 "designer|targetType": "Ext.dataview.List",
@@ -158,6 +163,28 @@
                 ]
             },
             "designerId": "ad2e69c4-158a-4e32-8b18-a5cbeb56214e"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceItemTap",
+                "implHandler": [
+                    "var runtime = FP.config.Runtime;",
+                    "",
+                    "runtime.setTransaction(record.data);",
+                    "console.log(runtime.getTransaction());",
+                    "this.redirectTo('accountBalanceForm/edit');"
+                ],
+                "name": "itemtap",
+                "designer|targetType": "Ext.dataview.List",
+                "designer|controlQuery": "list#accountBalance"
+            },
+            "designerId": "826d2a1a-9870-4734-aae5-7add42925c2c"
         }
     ]
 }

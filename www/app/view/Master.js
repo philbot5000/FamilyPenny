@@ -165,6 +165,10 @@ Ext.define('FP.view.Master', {
                         cls: 'account-menu',
                         height: 40,
                         hidden: true,
+                        hideAnimation: {
+                            type: 'slideOut',
+                            direction: 'down'
+                        },
                         itemId: 'accountInfo',
                         showAnimation: {
                             type: 'slide',
@@ -180,7 +184,6 @@ Ext.define('FP.view.Master', {
                                 xtype: 'container',
                                 docked: 'right',
                                 height: 40,
-                                html: 'Balance:',
                                 itemId: 'balanceDisplay',
                                 padding: 10,
                                 style: 'font-size: 0.8em;'

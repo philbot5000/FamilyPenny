@@ -179,21 +179,13 @@
             ],
             "className": "AccountBalanceForm"
         },
-        "8b808b8e-3d7f-49f9-9f82-a690ec46c9eb": {
+        "1af8f4da-876c-45ed-8d2b-d254790f9813": {
             "paths": [
-                "metadata/view/datetime1",
-                "app/view/override/datetime1.js",
-                "app/view/datetime1.js"
+                "metadata/view/MyPanel",
+                "app/view/override/MyPanel.js",
+                "app/view/MyPanel.js"
             ],
-            "className": "datetime1"
-        },
-        "4c845423-250c-40c1-8316-5ff9897cea7e": {
-            "paths": [
-                "metadata/view/DateTime",
-                "app/view/override/DateTime.js",
-                "app/view/DateTime.js"
-            ],
-            "className": "DateTime"
+            "className": "MyPanel"
         }
     },
     "viewOrderMap": {
@@ -205,8 +197,7 @@
             "e037b4ff-2e20-4e18-b3c4-702b35458a4b",
             "d5abd865-dee8-4d55-9d66-d22990da7b1d",
             "1ada8916-3b55-4ef0-bb70-de6355884a38",
-            "8b808b8e-3d7f-49f9-9f82-a690ec46c9eb",
-            "4c845423-250c-40c1-8316-5ff9897cea7e"
+            "1af8f4da-876c-45ed-8d2b-d254790f9813"
         ],
         "store": [
             "cecfb960-dc32-47e7-9cca-09c58e3a687c",

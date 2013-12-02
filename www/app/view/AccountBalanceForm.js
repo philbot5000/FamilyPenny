@@ -25,8 +25,14 @@ Ext.define('FP.view.AccountBalanceForm', {
         items: [
             {
                 xtype: 'fieldset',
+                itemId: 'accountBalanceFormSet',
                 title: 'New One-Time Transaction',
                 items: [
+                    {
+                        xtype: 'hiddenfield',
+                        itemId: 'userAccount_id',
+                        name: 'userAccount_id'
+                    },
                     {
                         xtype: 'selectfield',
                         itemId: 'account',
@@ -35,7 +41,47 @@ Ext.define('FP.view.AccountBalanceForm', {
                         autoSelect: false,
                         displayField: 'name',
                         store: 'userAccounts',
-                        valueField: 'id'
+                        valueField: 'id',
+                        listeners: [
+                            {
+                                fn: function(component, eOpts) {
+                                    var main = Ext.getCmp('main'),
+                                        hidden = Ext.ComponentQuery.query('#userAccount_id')[0],
+                                        runtime = FP.config.Runtime;
+
+
+                                    if(main.defaultAccountTransaction) {
+
+                                        // get default account for this user
+                                        var store = Ext.getStore('userAccounts');
+
+                                        store.filter('account_id', runtime.getAccount().id);
+
+                                        var index = store.findExact('defaultAccount', true);
+
+                                        // if record is found set the default account, else set to ''
+                                        if(index !== -1) {
+                                            var record = store.getAt(index);
+
+                                            console.log(record);
+                                            hidden.setValue(record.data.id);
+                                            component.setValue(record.data.name);
+                                            FP.config.Runtime.setUserAccount(record.data);
+                                        } else {
+                                            component.setValue('');
+                                        }
+
+                                        //store.clearFilter();
+                                    }
+
+                                    if(!main.defaultAccountTransaction) {
+                                        component.setValue(runtime.getUserAccount().name);
+                                        hidden.setValue(runtime.getUserAccount().id);
+                                    }
+                                },
+                                event: 'initialize'
+                            }
+                        ]
                     },
                     {
                         xtype: 'selectfield',
@@ -80,7 +126,8 @@ Ext.define('FP.view.AccountBalanceForm', {
                         xtype: 'numberfield',
                         itemId: 'amount',
                         name: 'amount',
-                        placeHolder: '$0.00'
+                        placeHolder: '$0.00',
+                        stepValue: 0.01
                     },
                     {
                         xtype: 'container',
@@ -92,9 +139,14 @@ Ext.define('FP.view.AccountBalanceForm', {
                                     component.add({
                                         xtype: 'datetimepickerfield',
                                         name: 'date',
+                                        cancelButton: null,
                                         placeHolder: 'Date',
-                                        ampm: true,
-                                        slotOrder: ['month', 'day'],
+                                        dateTimeFormat: 'n/j/Y',
+                                        picker: {
+                                            yearFrom: 1980,
+                                            ampm : false,
+                                            slotOrder: ['month','day','year']
+                                        },
                                         value: new Date()
                                     });
                                 },
@@ -103,30 +155,35 @@ Ext.define('FP.view.AccountBalanceForm', {
                         ]
                     },
                     {
-                        xtype: 'textfield',
-                        hidden: true,
-                        itemId: 'date',
-                        placeHolder: 'Date'
-                    },
-                    {
-                        xtype: 'hiddenfield',
-                        itemId: 'userAccount_id',
-                        name: 'userAccount_id'
-                    },
-                    {
                         xtype: 'container',
-                        padding: 20,
+                        padding: 10,
                         layout: {
                             pack: 'center',
                             type: 'hbox'
                         },
                         items: [
                             {
-                                xtype: 'button',
-                                itemId: 'addTransaction',
-                                ui: 'confirm',
-                                iconCls: 'compose',
-                                text: 'Save Transaction'
+                                xtype: 'segmentedbutton',
+                                flex: 1,
+                                items: [
+                                    {
+                                        xtype: 'button',
+                                        flex: 1,
+                                        hidden: true,
+                                        itemId: 'deleteTransaction',
+                                        ui: 'decline',
+                                        iconCls: 'trash',
+                                        text: 'Delete'
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        flex: 1,
+                                        itemId: 'addTransaction',
+                                        ui: 'confirm',
+                                        iconCls: 'compose',
+                                        text: 'Save'
+                                    }
+                                ]
                             }
                         ]
                     }
@@ -138,19 +195,6 @@ Ext.define('FP.view.AccountBalanceForm', {
                 fn: 'onAccountChange',
                 event: 'change',
                 delegate: '#account'
-            },
-            {
-                fn: 'onDateFocus',
-                event: 'focus',
-                delegate: '#date'
-            },
-            {
-                fn: 'onAccountBalanceFormActivate',
-                event: 'activate'
-            },
-            {
-                fn: 'onAccountBalanceFormDeactivate',
-                event: 'deactivate'
             }
         ]
     },
@@ -162,33 +206,16 @@ Ext.define('FP.view.AccountBalanceForm', {
             record = store.getAt(index);
 
 
-        FP.config.Runtime.setUserAccount(record.data);
+        //FP.config.Runtime.setUserAccount(record.data);
 
         hidden.setValue(newValue);
 
 
         // find exact userAccount with id... set userAccount() in runtime
-        console.log(newValue);
-    },
+        //console.log(newValue);
 
-    onDateFocus: function(textfield, e, eOpts) {
-        var picker = Ext.create('FP.view.DateTime');
-        textfield.blur();
-        picker.show();
-    },
 
-    onAccountBalanceFormActivate: function(newActiveItem, container, oldActiveItem, eOpts) {
-        var main = Ext.getCmp('main');
-
-        main.query('#back')[0].hide();
-        main.query('#editUser')[0].setText('Cancel');
-    },
-
-    onAccountBalanceFormDeactivate: function(oldActiveItem, container, newActiveItem, eOpts) {
-        var main = Ext.getCmp('main');
-
-        main.query('#editUser')[0].setText('Edit');
-        main.query('#back')[0].show();
+        //this.changeAccount(newValue);
     }
 
 });

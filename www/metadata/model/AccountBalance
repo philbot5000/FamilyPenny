@@ -129,6 +129,69 @@
             },
             "codeClass": null,
             "designerId": "e8101697-b1f2-427f-af07-7a37f770312a"
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "message": "You must select an account",
+                "designer|displayName": "userAccountValidation",
+                "field": "userAccount_id"
+            },
+            "designerId": "ef665ce7-0cef-4b26-9958-a0d5b3f53cb5",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "message": "Amount is required.",
+                "designer|displayName": "amountValidation",
+                "field": "amount"
+            },
+            "designerId": "26c9cfcc-e1e1-4ade-90f0-10cac5fe9caa",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "message": "Description is required.",
+                "designer|displayName": "descriptionValidation",
+                "field": "description"
+            },
+            "designerId": "42525678-3514-40c3-94b7-3e897487eb5f",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
         }
     ]
 }

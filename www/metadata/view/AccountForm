@@ -30,7 +30,8 @@
             "codeClass": null,
             "userConfig": {
                 "height": null,
-                "title": "Add Account"
+                "itemId": "accountField",
+                "title": "Add User"
             },
             "designerId": "18f355f8-6c17-4083-9e61-357d4cdab3de",
             "cn": [
@@ -98,12 +99,27 @@
                         "name": "accountType",
                         "placeHolder": "Account Type",
                         "autoSelect": false,
+                        "defaultPhonePickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
+                        "defaultTabletPickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
                         "options": [
                             "[",
                             "    {text: \"Child\", value: \"Child\"},",
                             "    {text: \"Parent\", value: \"Parent\"},",
                             "    {text: \"Relative\", value: \"Relative\"}",
                             "]"
+                        ],
+                        "usePicker": [
+                            "false"
                         ]
                     },
                     "designerId": "586820b8-9f5d-4f94-b5ae-dee6f7ef847d"
@@ -122,6 +138,18 @@
                         "name": "summaryType",
                         "placeHolder": "Summary Type",
                         "autoSelect": false,
+                        "defaultPhonePickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
+                        "defaultTabletPickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
                         "options": [
                             "[",
                             "    {text: \"Never\", value: \"Never\"},",
@@ -129,6 +157,9 @@
                             "    {text: \"Weekly\", value: \"Weekly\"},",
                             "    {text: \"Monthly\", value: \"Monthly\"}",
                             "]"
+                        ],
+                        "usePicker": [
+                            "false"
                         ]
                     },
                     "designerId": "126652d3-0718-412c-be7f-fa977d43332b"
@@ -145,19 +176,6 @@
                         "name": "image"
                     },
                     "designerId": "691b2d37-5212-4ae7-bb87-b72a216557d2"
-                },
-                {
-                    "type": "Ext.Label",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "html": "User Options:",
-                        "padding": 7
-                    },
-                    "designerId": "e07623b9-00ed-46c5-a430-63fa1817f00a"
                 },
                 {
                     "type": "Ext.Container",
@@ -199,6 +217,7 @@
                                         "layout|flex": 1,
                                         "docked": null,
                                         "height": null,
+                                        "hidden": true,
                                         "itemId": "deleteUser",
                                         "margin": null,
                                         "right": null,
@@ -218,6 +237,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": 1,
+                                        "hidden": true,
                                         "itemId": "takeImageButton",
                                         "margin": null,
                                         "ui": "action-small",
@@ -237,7 +257,7 @@
                                     "userConfig": {
                                         "layout|flex": 1,
                                         "itemId": "submitUser",
-                                        "ui": "confirm-small",
+                                        "ui": "confirm",
                                         "width": null,
                                         "iconCls": "user",
                                         "text": "Save"

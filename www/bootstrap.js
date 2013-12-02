@@ -727,6 +727,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.device.analytics.Cordova": [],
   "Ext.ux.device.twitter.Abstract": [],
   "Ext.ux.device.twitter.Cordova": [],
+  "Ext.ux.field.DateTimePicker": [
+    "Ext.form.DateTimePicker"
+  ],
   "Ext.ux.parse.Helper": [
     "ParseHelper"
   ],
@@ -736,6 +739,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.parse.Store": [],
   "Ext.ux.parse.association.Pointer": [],
   "Ext.ux.parse.association.Relation": [],
+  "Ext.ux.picker.DateTime": [
+    "Ext.ux.DateTimePicker"
+  ],
   "Ext.viewport.Android": [],
   "Ext.viewport.Default": [],
   "Ext.viewport.Ios": [],
@@ -761,11 +767,10 @@ Ext.ClassManager.addNameAlternateMappings({
   "FP.view.AccountBalanceForm": [],
   "FP.view.AccountForm": [],
   "FP.view.Accounts": [],
-  "FP.view.DateTime": [],
   "FP.view.Master": [],
+  "FP.view.MyPanel": [],
   "FP.view.UserAccountForm": [],
   "FP.view.UserAccounts": [],
-  "FP.view.datetime1": [],
   "FamilyPenny.view.Main": []
 });
 Ext.ClassManager.addNameAliasMappings({
@@ -1681,6 +1686,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.device.analytics.Cordova": [],
   "Ext.ux.device.twitter.Abstract": [],
   "Ext.ux.device.twitter.Cordova": [],
+  "Ext.ux.field.DateTimePicker": [
+    "widget.datetimepickerfield"
+  ],
   "Ext.ux.parse.Helper": [],
   "Ext.ux.parse.Model": [],
   "Ext.ux.parse.Proxy": [
@@ -1695,6 +1703,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Ext.ux.parse.association.Relation": [
     "association.relation"
+  ],
+  "Ext.ux.picker.DateTime": [
+    "widget.datetimepicker"
   ],
   "Ext.viewport.Android": [],
   "Ext.viewport.Default": [
@@ -1723,15 +1734,10 @@ Ext.ClassManager.addNameAliasMappings({
   "FP.view.Accounts": [
     "widget.accounts"
   ],
-  "FP.view.DateTime": [
-    "widget.datetime"
-  ],
   "FP.view.Master": [],
+  "FP.view.MyPanel": [],
   "FP.view.UserAccountForm": [],
   "FP.view.UserAccounts": [],
-  "FP.view.datetime1": [
-    "widget.dateTimePicker"
-  ],
   "FamilyPenny.view.Main": [
     "widget.main"
   ]

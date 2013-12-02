@@ -22,7 +22,8 @@ Ext.define('FP.view.AccountForm', {
         items: [
             {
                 xtype: 'fieldset',
-                title: 'Add Account',
+                itemId: 'accountField',
+                title: 'Add User',
                 items: [
                     {
                         xtype: 'textfield',
@@ -53,6 +54,14 @@ Ext.define('FP.view.AccountForm', {
                         name: 'accountType',
                         placeHolder: 'Account Type',
                         autoSelect: false,
+                        defaultPhonePickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
+                        defaultTabletPickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
                         options: [
                             {
                                 text: 'Child',
@@ -66,7 +75,8 @@ Ext.define('FP.view.AccountForm', {
                                 text: 'Relative',
                                 value: 'Relative'
                             }
-                        ]
+                        ],
+                        usePicker: false
                     },
                     {
                         xtype: 'selectfield',
@@ -75,6 +85,14 @@ Ext.define('FP.view.AccountForm', {
                         name: 'summaryType',
                         placeHolder: 'Summary Type',
                         autoSelect: false,
+                        defaultPhonePickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
+                        defaultTabletPickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
                         options: [
                             {
                                 text: 'Never',
@@ -92,17 +110,13 @@ Ext.define('FP.view.AccountForm', {
                                 text: 'Monthly',
                                 value: 'Monthly'
                             }
-                        ]
+                        ],
+                        usePicker: false
                     },
                     {
                         xtype: 'hiddenfield',
                         itemId: 'image',
                         name: 'image'
-                    },
-                    {
-                        xtype: 'label',
-                        html: 'User Options:',
-                        padding: 7
                     },
                     {
                         xtype: 'container',
@@ -121,6 +135,7 @@ Ext.define('FP.view.AccountForm', {
                                     {
                                         xtype: 'button',
                                         flex: 1,
+                                        hidden: true,
                                         itemId: 'deleteUser',
                                         ui: 'decline-small',
                                         iconCls: 'trash',
@@ -129,6 +144,7 @@ Ext.define('FP.view.AccountForm', {
                                     {
                                         xtype: 'button',
                                         flex: 1,
+                                        hidden: true,
                                         itemId: 'takeImageButton',
                                         ui: 'action-small',
                                         iconCls: 'user',
@@ -138,7 +154,7 @@ Ext.define('FP.view.AccountForm', {
                                         xtype: 'button',
                                         flex: 1,
                                         itemId: 'submitUser',
-                                        ui: 'confirm-small',
+                                        ui: 'confirm',
                                         iconCls: 'user',
                                         text: 'Save'
                                     }

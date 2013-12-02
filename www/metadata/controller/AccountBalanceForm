@@ -23,7 +23,10 @@
                 "implHandler": [
                     "var main = Ext.getCmp('main'),",
                     "    accountBalanceForm = Ext.create('FP.view.AccountBalanceForm'),",
-                    "    back = main.query('#back')[0];",
+                    "    back = main.query('#back')[0],",
+                    "    accountMenu = main.query('#accountMenu')[0];",
+                    "",
+                    "accountMenu.hide();",
                     "",
                     "back.view = '#accountBalance';",
                     "back.show();",
@@ -41,70 +44,34 @@
             },
             "codeClass": null,
             "userConfig": {
-                "fn": "onUserAccount_idInitialize",
-                "implHandler": [
-                    ""
-                ],
-                "name": "initialize",
-                "designer|targetType": "Ext.field.Hidden",
-                "designer|controlQuery": "hiddenfield#userAccount_id"
-            },
-            "designerId": "9032c588-daf3-4ac5-9867-2564bf550b95"
-        },
-        {
-            "type": "controlleraction",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
                 "fn": "onAddTransactionTap",
                 "implHandler": [
                     "var form = Ext.ComponentQuery.query('#accountBalanceForm')[0],",
                     "    transactionValues = form.getValues(),",
-                    "    store = Ext.getStore('accountBalance'),",
+                    "    errorMessage = '',",
                     "    model = Ext.create('FP.model.AccountBalance', transactionValues),",
-                    "    errorMessage,",
                     "    errors = model.validate();",
                     "",
                     "",
+                    "// First, the form must be valid ...",
+                    "if(!errors.isValid()) {",
+                    "    console.log(errors);",
+                    "    errors.each(function(err) {",
+                    "        errorMessage += err.getMessage() + '<br />';",
+                    "    });",
                     "",
-                    "if(form.edit) {",
-                    "    // get record in local storage and set new values and sync...",
-                    "    var id = form.getValues().userAccount_id,",
-                    "        index = store.findExact('id', id),",
-                    "        record = store.getAt(index);",
-                    "",
-                    "    //record.set('firstName', accountValues.firstName);",
-                    "    //record.set('lastName', accountValues.lastName);",
-                    "",
-                    "    //store.sync();",
-                    "    //this.redirectTo('accounts');",
-                    "",
+                    "    Ext.Msg.alert('Transaction is invalid', errorMessage);",
                     "",
                     "} else {",
                     "",
-                    "    if(!errors.isValid()) {",
-                    "        errors.each(function(err) {",
-                    "            errorMessage += err.getMessage() + '\\n';",
-                    "        });",
+                    "    if(form.edit) {",
                     "",
-                    "        alert('Work in progress'+errorMessage);",
-                    "        console.log(errorMessage);",
+                    "        this.updateTransaction(transactionValues);",
                     "",
                     "    } else {",
                     "",
-                    "        //model.set('date', new Date());",
-                    "        model.set('category', 'testing');",
+                    "        this.addTransaction(transactionValues);",
                     "",
-                    "        store.add(model);",
-                    "        store.sync();",
-                    "        FP.config.Runtime.setAccountBalance(model.data);",
-                    "",
-                    "        this.updateBalance();",
-                    "",
-                    "        this.redirectTo('accountBalance');",
                     "    }",
                     "}"
                 ],
@@ -113,6 +80,42 @@
                 "designer|controlQuery": "button#addTransaction"
             },
             "designerId": "c8fae1dc-0fba-41be-82f3-1d0a0b7ed7e1"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "accountBalanceForm/edit",
+                "fn": "showAccountBalanceFormEdit",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    accountBalanceForm = Ext.create('FP.view.AccountBalanceForm'),",
+                    "    set = accountBalanceForm.getComponent('accountBalanceFormSet'),",
+                    "    account = Ext.ComponentQuery.query('#account')[0],",
+                    "    back = main.query('#back')[0],",
+                    "    accountMenu = main.query('#accountMenu')[0],",
+                    "    deleteButton = Ext.ComponentQuery.query('#deleteTransaction')[0],",
+                    "    transaction = FP.config.Runtime.getTransaction();",
+                    "",
+                    "accountMenu.hide();",
+                    "account.hide();",
+                    "deleteButton.show();",
+                    "",
+                    "accountBalanceForm.edit = true;",
+                    "accountBalanceForm.setValues(transaction);",
+                    "set.setTitle('Edit Transaction');",
+                    "",
+                    "back.view = '#accountBalance';",
+                    "back.show();",
+                    "",
+                    "main.setActiveItem(accountBalanceForm);"
+                ]
+            },
+            "designerId": "c111d9a5-4fc8-49be-83f6-ee552e8a734e"
         },
         {
             "type": "basicfunction",
@@ -129,12 +132,174 @@
                     "    index = store.findExact('id', FP.config.Runtime.getUserAccount().id),",
                     "    record = store.getAt(index);",
                     "",
+                    "console.log(record);",
                     "",
                     "record.set('balance', FP.app.calculateBalance());",
+                    "console.log(FP.app.calculateBalance());",
                     "store.sync();"
                 ]
             },
             "designerId": "cbe40848-736e-4857-a5b1-c4ed37d62f52"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "updateTransaction",
+                "designer|params": [
+                    "transactionValues"
+                ],
+                "implHandler": [
+                    "// get record in local storage and set new values and sync...",
+                    "var id = FP.config.Runtime.getTransaction().id,",
+                    "    store = Ext.getStore('accountBalance'),",
+                    "    index = store.findExact('id', id),",
+                    "    record = store.getAt(index);",
+                    "",
+                    "record.set('amount', transactionValues.amount);",
+                    "record.set('description', transactionValues.description);",
+                    "record.set('date', transactionValues.date);",
+                    "",
+                    "store.sync();",
+                    "",
+                    "FP.config.Runtime.setAccountBalance(record.data);",
+                    "",
+                    "store.clearFilter();",
+                    "store.filter('userAccount_id', FP.config.Runtime.getUserAccount().id, false, true);",
+                    "",
+                    "",
+                    "this.updateBalance();",
+                    "this.redirectTo('accountBalance');"
+                ]
+            },
+            "designerId": "57a6978f-3240-4b1d-ac39-3b76e37b1fdb"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "addTransaction",
+                "designer|params": [
+                    "transactionValues"
+                ],
+                "implHandler": [
+                    "var store = Ext.getStore('accountBalance'),",
+                    "    model = Ext.create('FP.model.AccountBalance', transactionValues);",
+                    "",
+                    "model.set('category', 'testing');",
+                    "",
+                    "store.add(model);",
+                    "store.sync();",
+                    "",
+                    "FP.config.Runtime.setAccountBalance(model.data);",
+                    "",
+                    "store.clearFilter();",
+                    "store.filter('userAccount_id', FP.config.Runtime.getUserAccount().id, false, true);",
+                    "",
+                    "this.updateBalance();",
+                    "",
+                    "this.redirectTo('accountBalance');"
+                ]
+            },
+            "designerId": "95b34d04-dfea-4c79-b92a-d6aca51aba48"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "deleteTransaction",
+                "designer|params": [
+                    "id"
+                ],
+                "implHandler": [
+                    "var store = Ext.getStore('accountBalance'),",
+                    "    index = store.findExact('id', id),",
+                    "    record = store.getAt(index);",
+                    "",
+                    "",
+                    "store.remove(record);",
+                    "store.sync();",
+                    "this.updateBalance();"
+                ]
+            },
+            "designerId": "faa59142-7585-4533-9ff0-461d8047bc12"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onDeleteTransactionTap",
+                "implHandler": [
+                    "var id = FP.config.Runtime.getTransaction().id;",
+                    "",
+                    "// TODO: Message are you sure you wish to delete this transaction",
+                    "this.deleteTransaction(id);",
+                    "",
+                    "this.redirectTo('accountBalance');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#deleteTransaction"
+            },
+            "designerId": "9823ecf3-01aa-4447-8354-097835de8596"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceFormActivate",
+                "implHandler": [
+                    "var main = Ext.getCmp('main');",
+                    "",
+                    "main.query('#back')[0].hide();",
+                    "main.query('#editUser')[0].setText('Cancel');"
+                ],
+                "name": "activate",
+                "designer|targetType": "Ext.form.Panel",
+                "designer|controlQuery": "formpanel#accountBalanceForm"
+            },
+            "designerId": "558e1ec9-368f-4801-80b4-79b4b4fa7683"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAccountBalanceFormDeactivate",
+                "implHandler": [
+                    "var main = Ext.getCmp('main');",
+                    "",
+                    "main.query('#editUser')[0].setText('Edit');",
+                    "main.query('#back')[0].show();"
+                ],
+                "name": "deactivate",
+                "designer|targetType": "Ext.form.Panel",
+                "designer|controlQuery": "formpanel#accountBalanceForm"
+            },
+            "designerId": "e9813b1b-498d-489a-bbe2-f5299487ff9e"
         }
     ]
 }

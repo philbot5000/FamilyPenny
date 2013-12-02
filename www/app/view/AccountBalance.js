@@ -18,7 +18,7 @@ Ext.define('FP.view.AccountBalance', {
 
     config: {
         itemId: 'accountBalance',
-        emptyText: 'Add Transactions',
+        emptyText: '<img align="middle" src="images/fp.png"  width="75px" /><span class="emptyList">Add transactions.</span>',
         pressedCls: 'fp-item-pressed',
         store: 'accountBalance',
         grouped: true,

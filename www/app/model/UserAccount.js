@@ -34,6 +34,29 @@ Ext.define('FP.model.UserAccount', {
             {
                 name: 'balance',
                 type: 'float'
+            },
+            {
+                name: 'interest'
+            },
+            {
+                name: 'term'
+            },
+            {
+                defaultValue: false,
+                name: 'defaultAccount',
+                type: 'boolean'
+            }
+        ],
+        validations: [
+            {
+                type: 'presence',
+                message: 'Name must be present',
+                field: 'name'
+            },
+            {
+                type: 'presence',
+                message: 'Must choose an account type',
+                field: 'type'
             }
         ],
         proxy: {

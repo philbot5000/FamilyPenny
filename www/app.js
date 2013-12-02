@@ -37,12 +37,12 @@ Ext.application({
         'AccountForm',
         'UserAccountForm',
         'AccountBalanceForm',
-        'datetime1',
-        'DateTime'
+        'MyPanel'
     ],
     requires: [
         'FP.config.Runtime',
-        'Ext.DateExtras'
+        'Ext.DateExtras',
+        'Ext.MessageBox'
     ],
     controllers: [
         'Master',
@@ -76,7 +76,7 @@ Ext.application({
             records = store.data.items,
             total = 0;
 
-
+        console.log(records);
         for(var i = 0; i < records.length; i++) {
 
             total += records[i].data.amount;
@@ -136,10 +136,6 @@ Ext.application({
             //alert('Failed because: ' + message);
             //dataview.show();
         }
-    },
-
-    deleteUser: function(id) {
-
     }
 
 });

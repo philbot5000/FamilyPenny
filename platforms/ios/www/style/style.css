@@ -1,3 +1,10 @@
+.x-panel.x-floating {
+    padding: 0px !important;
+}
+.fp-item-pressed {
+    opacity: 0.5;
+}
+
 .x-picker .x-picker-inner{
     margin: 0px !important;
     padding: 0.7em !important;
@@ -21,6 +28,11 @@
     
 }
 
+.emptyList {
+    font-size: 2em;
+    display: block;
+    clear: both;
+}
 
 .user-image {
     height: 75px;
@@ -68,6 +80,12 @@
 .red {
     background: #F25050;
 }
+
+.positive { color: #65CE41; border-radius: 5px; margin: 5px; padding: 3px; } 
+
+.negative { color: #F25050; border-radius: 5px; margin: 5px; padding: 3px; } 
+
+.zero { color: #ccc; border-radius: 5px; margin: 5px; padding: 3px; }
 
 .toolbar {
     -webkit-border-radius: 0px 0px 0px 0px !important;

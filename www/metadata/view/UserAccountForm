@@ -20,7 +20,7 @@
             "codeClass": null,
             "userConfig": {
                 "itemId": "userAccountSet",
-                "title": ""
+                "title": "Add Account"
             },
             "designerId": "b4c892c5-8f37-4819-8e3c-4b3cd419219b",
             "cn": [
@@ -53,6 +53,18 @@
                         "name": "type",
                         "placeHolder": "Account Type",
                         "autoSelect": false,
+                        "defaultPhonePickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
+                        "defaultTabletPickerConfig": [
+                            "{",
+                            "    width: '90%',",
+                            "    centered: true",
+                            "}"
+                        ],
                         "options": [
                             "[",
                             "    {text: \"Cash\", value: \"Cash Account\"},",
@@ -60,6 +72,9 @@
                             "    {text: \"Credit\", value: \"Credit Account\"},",
                             "    {text: \"Loan\", value: \"Loan Account\"}",
                             "]"
+                        ],
+                        "usePicker": [
+                            "false"
                         ]
                     },
                     "designerId": "77612000-1ef7-4318-bd72-85946f5f5bd9"
@@ -72,27 +87,110 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "itemId": "interestRate",
-                        "label": null,
-                        "name": "interestRate",
-                        "placeHolder": "Interest Rate"
+                        "hidden": true,
+                        "hideAnimation": "fadeOut",
+                        "itemId": "interest",
+                        "showAnimation": [
+                            "{type: 'fade'}"
+                        ],
+                        "label": "Interest Rate:",
+                        "labelWidth": "50%",
+                        "name": "interest",
+                        "placeHolder": "0.00%"
+                    },
+                    "configAlternates": {
+                        "showAnimation": "object"
                     },
                     "designerId": "0b628ecf-477a-4b11-b3b3-791d29be578f"
                 },
                 {
-                    "type": "Ext.field.Text",
+                    "type": "Ext.field.Number",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "hidden": true,
+                        "itemId": "creditLimit",
+                        "label": "Credit Limit:",
+                        "labelWidth": "50%",
+                        "name": "creditLimit",
+                        "placeHolder": "$0.00"
+                    },
+                    "designerId": "dea97351-7862-4736-8583-a53415f299c7"
+                },
+                {
+                    "type": "Ext.field.Number",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "hidden": true,
+                        "itemId": "loanAmount",
+                        "label": "Loan Amount:",
+                        "labelWidth": "50%",
+                        "name": "loanAmount",
+                        "placeHolder": "$0.00"
+                    },
+                    "designerId": "f378e50d-fd9a-4573-88d3-4c22caf63ba7"
+                },
+                {
+                    "type": "Ext.field.Number",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": 1,
+                        "hidden": true,
                         "itemId": "term",
-                        "label": null,
+                        "label": "Term:",
+                        "labelWidth": "50%",
                         "name": "term",
-                        "placeHolder": "Term"
+                        "placeHolder": "0"
                     },
                     "designerId": "679f2099-9f69-46e1-a55e-1249029e944d"
+                },
+                {
+                    "type": "Ext.field.Radio",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "docked": null,
+                        "hidden": true,
+                        "style": "font-size: 0.8em;",
+                        "width": null,
+                        "label": "Years:",
+                        "labelWidth": "60%",
+                        "name": "termType",
+                        "value": "years"
+                    },
+                    "designerId": "6be3cfd5-f915-4b80-aeb7-b0e185635780"
+                },
+                {
+                    "type": "Ext.field.Radio",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "hidden": true,
+                        "style": "font-size: 0.8em;",
+                        "width": null,
+                        "label": "Months:",
+                        "labelWidth": "60%",
+                        "name": "termType",
+                        "value": "months"
+                    },
+                    "designerId": "4f45a55d-905b-4e80-ae96-a7f0ba818428"
                 },
                 {
                     "type": "Ext.field.Hidden",
@@ -108,13 +206,18 @@
                     "designerId": "7aaa79d4-bef2-4c25-87ba-e52da631583f"
                 },
                 {
-                    "type": "Ext.Container",
+                    "type": "Ext.field.Checkbox",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
-                    "designerId": "19c29a02-df2b-4d0e-bcee-2e11202690e0"
+                    "userConfig": {
+                        "label": "Default:",
+                        "name": "defaultAccount",
+                        "value": "true"
+                    },
+                    "designerId": "55bae8eb-f6f8-4220-b9b0-76274ad95036"
                 },
                 {
                     "type": "Ext.Container",
@@ -134,35 +237,55 @@
                     "designerId": "80c7bb45-bc57-473a-b3ae-331afe24e36f",
                     "cn": [
                         {
-                            "type": "Ext.Button",
+                            "type": "Ext.SegmentedButton",
                             "reference": {
                                 "name": "items",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "itemId": "saveUserAccount",
-                                "ui": "confirm",
-                                "width": 200,
-                                "iconCls": "bookmarks",
-                                "text": "Save User"
+                                "height": 35,
+                                "width": "100%"
                             },
-                            "designerId": "f4719ad9-20e0-40b6-915d-91429001cdf3"
-                        },
-                        {
-                            "type": "Ext.Button",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "margin": "10 0 0 0",
-                                "width": 200,
-                                "iconCls": "trash",
-                                "text": "Delete User"
-                            },
-                            "designerId": "f0b6b5f1-2e27-48e4-8d2f-2d2b0b710de3"
+                            "designerId": "90582e59-2543-4d53-b735-68c075897f8a",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "height": null,
+                                        "hidden": true,
+                                        "margin": null,
+                                        "ui": "decline-small",
+                                        "width": null,
+                                        "iconCls": "trash",
+                                        "text": "Delete"
+                                    },
+                                    "designerId": "f0b6b5f1-2e27-48e4-8d2f-2d2b0b710de3"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "itemId": "saveUserAccount",
+                                        "ui": "confirm",
+                                        "width": null,
+                                        "iconCls": "bookmarks",
+                                        "text": "Save"
+                                    },
+                                    "designerId": "f4719ad9-20e0-40b6-915d-91429001cdf3"
+                                }
+                            ]
                         }
                     ]
                 }

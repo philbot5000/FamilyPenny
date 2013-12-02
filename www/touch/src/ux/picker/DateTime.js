@@ -102,6 +102,9 @@ Ext.define('Ext.ux.picker.DateTime', {
          * @hide
          * @accessor
          */
+         
+
+        cancelButton: null
     },
 
     initialize: function() {

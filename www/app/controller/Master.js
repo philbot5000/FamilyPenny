@@ -108,16 +108,10 @@ Ext.define('FP.controller.Master', {
             break;
             case "#userAccounts":
             me.redirectTo('accounts');
-
-            //    main.query('#addUser')[0].show();
-            //    main.query('#accountMenu')[0].hide();
-            //   main.query('#menuButton')[0].show();
-            //    main.query('#editUser')[0].hide();
-            //    button.hide();
             break;
         }
 
-        console.log(view);
+
     },
 
     onMenuButtonTap: function(button, e, eOpts) {
@@ -150,12 +144,45 @@ Ext.define('FP.controller.Master', {
     },
 
     onEditUserTap: function(button, e, eOpts) {
-        if(button.getText() === "Edit") {
+        var main = Ext.getCmp('main'),
+            back = Ext.ComponentQuery.query('#back')[0],
+            runtime = FP.config.Runtime,
+            view = main.getActiveItem().getItemId();
+
+
+        switch(view) {
+
+            case "userAccounts":
             button.setText('Cancel');
             this.redirectTo('accountForm/edit');
-        } else {
+            break;
+
+            case "userAccountForm":
+            button.setText('Edit');
+            back.show();
+            this.redirectTo('accountBalance');
+            break;
+
+            case "accountForm":
             button.setText('Edit');
             this.redirectTo('userAccounts');
+            break;
+
+            case "accountBalance":
+            button.setText('Cancel');
+            this.redirectTo('userAccountForm/edit');
+            break;
+
+            case "accountBalanceForm":
+            button.setText('Edit');
+            if(runtime.getUserAccount() !== null) {
+                this.redirectTo('accountBalance');
+            }
+            else {
+                this.redirectTo('userAccounts');
+            }
+            break;
+
         }
     },
 
@@ -164,6 +191,22 @@ Ext.define('FP.controller.Master', {
     },
 
     onOneTimeTransactionTap: function(button, e, eOpts) {
+        var main = Ext.getCmp('main'),
+            view = main.getActiveItem().getItemId();
+
+        console.log(view);
+
+
+        // Sets a value so that account can be automatically set in AccountBalanceForm to either
+        // the default account or the account the user is viewing.
+
+        if(view === 'accountBalance') {
+            main.defaultAccountTransaction = false;
+        }
+
+        if(view === 'userAccounts') {
+            main.defaultAccountTransaction = true;
+        }
 
         this.redirectTo('accountBalanceForm');
     },

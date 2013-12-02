@@ -41,6 +41,8 @@ Ext.define('FP.controller.UserAccounts', {
 
         // List spacer for bottom toolbar.
         component.add({xtype:'component', height:60, scrollDock: 'bottom'});
+
+        component.getStore().filter('account_id', FP.config.Runtime.getAccount().id, false, true);
     },
 
     onUserAccountsDeactivate: function(oldActiveItem, container, newActiveItem, eOpts) {

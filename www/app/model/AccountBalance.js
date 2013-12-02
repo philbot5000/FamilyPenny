@@ -48,6 +48,23 @@ Ext.define('FP.model.AccountBalance', {
         ],
         proxy: {
             type: 'localstorage'
-        }
+        },
+        validations: [
+            {
+                type: 'presence',
+                message: 'You must select an account',
+                field: 'userAccount_id'
+            },
+            {
+                type: 'presence',
+                message: 'Amount is required.',
+                field: 'amount'
+            },
+            {
+                type: 'presence',
+                message: 'Description is required.',
+                field: 'description'
+            }
+        ]
     }
 });

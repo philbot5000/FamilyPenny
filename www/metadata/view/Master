@@ -271,6 +271,9 @@
                         ],
                         "height": 40,
                         "hidden": true,
+                        "hideAnimation": [
+                            "{type: 'slideOut', direction: 'down'}"
+                        ],
                         "itemId": "accountInfo",
                         "showAnimation": [
                             "{type: 'slide', direction: 'up'}"
@@ -279,7 +282,8 @@
                         "layout": "hbox"
                     },
                     "configAlternates": {
-                        "showAnimation": "object"
+                        "showAnimation": "object",
+                        "hideAnimation": "object"
                     },
                     "designerId": "d443a423-4363-432b-9b77-cad030b59dfc",
                     "cn": [
@@ -293,7 +297,7 @@
                             "userConfig": {
                                 "docked": "right",
                                 "height": 40,
-                                "html": "Balance:",
+                                "html": null,
                                 "itemId": "balanceDisplay",
                                 "padding": 10,
                                 "style": "font-size: 0.8em;"

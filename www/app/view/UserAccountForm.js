@@ -22,7 +22,7 @@ Ext.define('FP.view.UserAccountForm', {
             {
                 xtype: 'fieldset',
                 itemId: 'userAccountSet',
-                title: '',
+                title: 'Add Account',
                 items: [
                     {
                         xtype: 'textfield',
@@ -37,6 +37,14 @@ Ext.define('FP.view.UserAccountForm', {
                         name: 'type',
                         placeHolder: 'Account Type',
                         autoSelect: false,
+                        defaultPhonePickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
+                        defaultTabletPickerConfig: {
+                            width: '90%',
+                            centered: true
+                        },
                         options: [
                             {
                                 text: 'Cash',
@@ -54,19 +62,67 @@ Ext.define('FP.view.UserAccountForm', {
                                 text: 'Loan',
                                 value: 'Loan Account'
                             }
-                        ]
+                        ],
+                        usePicker: false
                     },
                     {
                         xtype: 'numberfield',
-                        itemId: 'interestRate',
-                        name: 'interestRate',
-                        placeHolder: 'Interest Rate'
+                        hidden: true,
+                        hideAnimation: 'fadeOut',
+                        itemId: 'interest',
+                        showAnimation: {
+                            type: 'fade'
+                        },
+                        label: 'Interest Rate:',
+                        labelWidth: '50%',
+                        name: 'interest',
+                        placeHolder: '0.00%'
                     },
                     {
-                        xtype: 'textfield',
+                        xtype: 'numberfield',
+                        hidden: true,
+                        itemId: 'creditLimit',
+                        label: 'Credit Limit:',
+                        labelWidth: '50%',
+                        name: 'creditLimit',
+                        placeHolder: '$0.00'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        hidden: true,
+                        itemId: 'loanAmount',
+                        label: 'Loan Amount:',
+                        labelWidth: '50%',
+                        name: 'loanAmount',
+                        placeHolder: '$0.00'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        border: 1,
+                        hidden: true,
                         itemId: 'term',
+                        label: 'Term:',
+                        labelWidth: '50%',
                         name: 'term',
-                        placeHolder: 'Term'
+                        placeHolder: '0'
+                    },
+                    {
+                        xtype: 'radiofield',
+                        hidden: true,
+                        style: 'font-size: 0.8em;',
+                        label: 'Years:',
+                        labelWidth: '60%',
+                        name: 'termType',
+                        value: 'years'
+                    },
+                    {
+                        xtype: 'radiofield',
+                        hidden: true,
+                        style: 'font-size: 0.8em;',
+                        label: 'Months:',
+                        labelWidth: '60%',
+                        name: 'termType',
+                        value: 'months'
                     },
                     {
                         xtype: 'hiddenfield',
@@ -74,7 +130,10 @@ Ext.define('FP.view.UserAccountForm', {
                         name: 'account_id'
                     },
                     {
-                        xtype: 'container'
+                        xtype: 'checkboxfield',
+                        label: 'Default:',
+                        name: 'defaultAccount',
+                        value: 'true'
                     },
                     {
                         xtype: 'container',
@@ -86,19 +145,27 @@ Ext.define('FP.view.UserAccountForm', {
                         },
                         items: [
                             {
-                                xtype: 'button',
-                                itemId: 'saveUserAccount',
-                                ui: 'confirm',
-                                width: 200,
-                                iconCls: 'bookmarks',
-                                text: 'Save User'
-                            },
-                            {
-                                xtype: 'button',
-                                margin: '10 0 0 0',
-                                width: 200,
-                                iconCls: 'trash',
-                                text: 'Delete User'
+                                xtype: 'segmentedbutton',
+                                height: 35,
+                                width: '100%',
+                                items: [
+                                    {
+                                        xtype: 'button',
+                                        flex: 1,
+                                        hidden: true,
+                                        ui: 'decline-small',
+                                        iconCls: 'trash',
+                                        text: 'Delete'
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        flex: 1,
+                                        itemId: 'saveUserAccount',
+                                        ui: 'confirm',
+                                        iconCls: 'bookmarks',
+                                        text: 'Save'
+                                    }
+                                ]
                             }
                         ]
                     }

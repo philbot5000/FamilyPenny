@@ -18,7 +18,7 @@ Ext.define('FP.view.UserAccounts', {
 
     config: {
         itemId: 'userAccounts',
-        emptyText: 'add Accounts',
+        emptyText: '<img align="middle" src="images/fp.png"  width="75px" /><span class="emptyList">Add an account.</span>',
         pressedCls: 'fp-item-pressed',
         store: 'userAccounts',
         grouped: true,

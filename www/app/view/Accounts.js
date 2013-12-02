@@ -22,8 +22,7 @@ Ext.define('FP.view.Accounts', {
         itemId: 'accounts',
         padding: 10,
         style: 'background: #fff;',
-        deferEmptyText: false,
-        emptyText: 'Add users',
+        emptyText: '<br /><br /><br /><br /><br /><br /><center><img align="middle" src="images/fp.png"  width="75px" /><span class="emptyList">Add an account.</span><center>',
         pressedCls: 'fp-item-pressed',
         store: 'accounts',
         scrollable: {

@@ -76,7 +76,9 @@
                     "component.setScrollable({ directionLock: true, scroll: 'vertical' });",
                     "",
                     "// List spacer for bottom toolbar.",
-                    "component.add({xtype:'component', height:60, scrollDock: 'bottom'});"
+                    "component.add({xtype:'component', height:60, scrollDock: 'bottom'});",
+                    "",
+                    "component.getStore().filter('account_id', FP.config.Runtime.getAccount().id, false, true);"
                 ],
                 "name": "initialize",
                 "designer|targetType": "Ext.dataview.List",

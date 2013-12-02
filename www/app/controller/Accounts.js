@@ -30,9 +30,6 @@ Ext.define('FP.controller.Accounts', {
 
     onAccountsItemTap: function(dataview, index, target, record, e, eOpts) {
         FP.config.Runtime.setAccount(record.data);
-        var store = Ext.getStore('userAccounts');
-
-        store.filter('account_id', record.data.id, false, true);
         this.redirectTo('userAccounts');
     },
 
@@ -45,6 +42,7 @@ Ext.define('FP.controller.Accounts', {
         main.query('#menuButton')[0].show();
         main.query('#back')[0].hide();
         main.query('#editUser')[0].hide();
+        main.query('#accountMenu')[0].hide();
 
 
         main.setActiveItem(accounts);

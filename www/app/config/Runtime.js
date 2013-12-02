@@ -3,6 +3,7 @@ Ext.define('FP.config.Runtime', {
 	config: {
 		account: null,
 		userAccount: null,
+		transaction: null,
 		accountBalance: null,
 		userAccountData: [
 			{

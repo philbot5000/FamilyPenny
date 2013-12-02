@@ -72,11 +72,11 @@ Ext.define('FP.controller.AccountForm', {
 
             if(!errors.isValid()) {
                 errors.each(function(err) {
-                    errorMessage += err.getMessage() + '\n';
+                    errorMessage += err.getMessage() + '\n ';
                 });
 
-                alert('Work in progress'+errorMessage);
-                console.log(errorMessage);
+                alert(errorMessage);
+                //console.log(errors);
 
             } else {
 
@@ -137,6 +137,7 @@ Ext.define('FP.controller.AccountForm', {
             addUser = Ext.create('FP.view.AccountForm'),
             back = main.query('#back')[0],
             menuButton = main.query('#menuButton')[0],
+            editButton = main.query('#editUser')[0],
             addUserButton = main.query('#addUser')[0];
 
 
@@ -144,6 +145,8 @@ Ext.define('FP.controller.AccountForm', {
         back.view = '#accountForm';
         back.show();
         menuButton.hide();
+        main.query('#accountMenu')[0].hide();
+
 
         main.setActiveItem(addUser);
     },
@@ -156,10 +159,13 @@ Ext.define('FP.controller.AccountForm', {
             addUserButton = main.query('#addUser')[0],
             editUserButton = main.query('#editUser')[0],
             runtime = FP.config.Runtime,
+            fieldSet = editUser.getComponent('accountField'),
             userValues = runtime.getAccount();
 
+        fieldSet.setTitle('Edit User');
+
         editUser.edit = true;
-        console.log(runtime.getAccount());
+        main.query('#accountMenu')[0].hide();
         editUser.setValues(userValues);
 
         editUserButton.show();

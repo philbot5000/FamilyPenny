@@ -77,6 +77,88 @@
             "designerId": "f31a87eb-aac5-4345-afd5-5fa4ed62ad8c"
         },
         {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "interest"
+            },
+            "designerId": "8849bf18-970f-4f6c-be4c-413e70a08a92"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "term"
+            },
+            "designerId": "0bf522da-9c66-42d5-98af-477394d4f747"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "defaultValue": [
+                    "false"
+                ],
+                "name": "defaultAccount",
+                "type": "boolean"
+            },
+            "designerId": "6e5ed2cb-4ded-49d4-96a3-5d6baeefedfd"
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "message": "Name must be present",
+                "designer|displayName": "nameFieldValidation",
+                "field": "name"
+            },
+            "designerId": "dec32dfb-9634-48c1-9fbd-31fa49dc6286",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
+        },
+        {
+            "type": "presencevalidation",
+            "reference": {
+                "name": "validations",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "message": "Must choose an account type",
+                "designer|displayName": "typeFieldValidation",
+                "field": "type"
+            },
+            "designerId": "deafb5b9-9191-41b2-a67d-ce054462018c",
+            "customConfigs": [
+                {
+                    "group": "(Custom Properties)",
+                    "name": "message",
+                    "type": "string"
+                }
+            ]
+        },
+        {
             "type": "Ext.data.proxy.LocalStorage",
             "reference": {
                 "name": "proxy",

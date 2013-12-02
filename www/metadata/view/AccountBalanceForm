@@ -22,10 +22,24 @@
             },
             "codeClass": null,
             "userConfig": {
+                "itemId": "accountBalanceFormSet",
                 "title": "New One-Time Transaction"
             },
             "designerId": "2e4ef609-4c40-44c4-a8f1-45f68e04dd3e",
             "cn": [
+                {
+                    "type": "Ext.field.Hidden",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "userAccount_id",
+                        "name": "userAccount_id"
+                    },
+                    "designerId": "f9ae7ca1-7726-4d3e-a997-2ba86081dd35"
+                },
                 {
                     "type": "Ext.field.Select",
                     "reference": {
@@ -61,17 +75,68 @@
                                     "    record = store.getAt(index);",
                                     "",
                                     "",
-                                    "FP.config.Runtime.setUserAccount(record.data);",
+                                    "//FP.config.Runtime.setUserAccount(record.data);",
                                     "",
                                     "hidden.setValue(newValue);",
                                     "",
                                     "",
                                     "// find exact userAccount with id... set userAccount() in runtime",
-                                    "console.log(newValue);"
+                                    "//console.log(newValue);",
+                                    "",
+                                    "",
+                                    "//this.changeAccount(newValue);"
                                 ],
                                 "name": "change"
                             },
-                            "designerId": "ae27c243-a3e7-494a-8051-a967f422bf04"
+                            "designerId": "d5900aa8-305d-427e-8d50-c4d2ff69a589"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onAccountInitialize",
+                                "implHandler": [
+                                    "var main = Ext.getCmp('main'),",
+                                    "    hidden = Ext.ComponentQuery.query('#userAccount_id')[0],",
+                                    "    runtime = FP.config.Runtime;",
+                                    "",
+                                    "",
+                                    "if(main.defaultAccountTransaction) {",
+                                    "",
+                                    "    // get default account for this user",
+                                    "    var store = Ext.getStore('userAccounts');",
+                                    "",
+                                    "    store.filter('account_id', runtime.getAccount().id);",
+                                    "",
+                                    "    var index = store.findExact('defaultAccount', true);",
+                                    "",
+                                    "    // if record is found set the default account, else set to ''",
+                                    "    if(index !== -1) {",
+                                    "        var record = store.getAt(index);",
+                                    "",
+                                    "        console.log(record);",
+                                    "        hidden.setValue(record.data.id);",
+                                    "        component.setValue(record.data.name);",
+                                    "        FP.config.Runtime.setUserAccount(record.data);",
+                                    "    } else {",
+                                    "        component.setValue('');",
+                                    "    }",
+                                    "",
+                                    "    //store.clearFilter();",
+                                    "}",
+                                    "",
+                                    "if(!main.defaultAccountTransaction) {",
+                                    "    component.setValue(runtime.getUserAccount().name);",
+                                    "    hidden.setValue(runtime.getUserAccount().id);",
+                                    "}"
+                                ],
+                                "name": "initialize"
+                            },
+                            "designerId": "2f19a428-02a1-4a90-be05-8e9486a46892"
                         }
                     ]
                 },
@@ -155,9 +220,11 @@
                     "codeClass": null,
                     "userConfig": {
                         "itemId": "amount",
+                        "component": null,
                         "label": null,
                         "name": "amount",
-                        "placeHolder": "$0.00"
+                        "placeHolder": "$0.00",
+                        "stepValue": 0.01
                     },
                     "designerId": "09388531-d6dc-40ca-85b0-55d38b7ea7dc"
                 },
@@ -187,9 +254,14 @@
                                     "component.add({",
                                     "    xtype: 'datetimepickerfield',",
                                     "    name: 'date',",
+                                    "    cancelButton: null,",
                                     "    placeHolder: 'Date',",
-                                    "    ampm: true,",
-                                    "    slotOrder: ['month', 'day'],",
+                                    "    dateTimeFormat: 'n/j/Y',",
+                                    "    picker: {",
+                                    "        yearFrom: 1980,",
+                                    "        ampm : false,",
+                                    "        slotOrder: ['month','day','year']",
+                                    "    },",
                                     "    value: new Date()",
                                     "});"
                                 ],
@@ -200,57 +272,6 @@
                     ]
                 },
                 {
-                    "type": "Ext.field.Text",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "height": null,
-                        "hidden": true,
-                        "itemId": "date",
-                        "margin": null,
-                        "label": null,
-                        "name": null,
-                        "placeHolder": "Date"
-                    },
-                    "designerId": "737c1692-d109-4388-bfdd-f2d5a4ecca0e",
-                    "cn": [
-                        {
-                            "type": "basiceventbinding",
-                            "reference": {
-                                "name": "listeners",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "fn": "onDateFocus",
-                                "implHandler": [
-                                    "var picker = Ext.create('FP.view.DateTime');",
-                                    "textfield.blur();",
-                                    "picker.show();"
-                                ],
-                                "name": "focus"
-                            },
-                            "designerId": "dfa32c8d-9660-4e75-a869-d0224de2e85b"
-                        }
-                    ]
-                },
-                {
-                    "type": "Ext.field.Hidden",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
-                        "itemId": "userAccount_id",
-                        "name": "userAccount_id"
-                    },
-                    "designerId": "f9ae7ca1-7726-4d3e-a997-2ba86081dd35"
-                },
-                {
                     "type": "Ext.Container",
                     "reference": {
                         "name": "items",
@@ -259,67 +280,61 @@
                     "codeClass": null,
                     "userConfig": {
                         "container|pack": "center",
-                        "padding": 20,
+                        "padding": 10,
                         "layout": "hbox"
                     },
                     "designerId": "fca948d0-5978-4e46-a22a-267e3ab64bcd",
                     "cn": [
                         {
-                            "type": "Ext.Button",
+                            "type": "Ext.SegmentedButton",
                             "reference": {
                                 "name": "items",
                                 "type": "array"
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "itemId": "addTransaction",
-                                "ui": "confirm",
-                                "iconCls": "compose",
-                                "text": "Save Transaction"
+                                "layout|flex": 1
                             },
-                            "designerId": "afb96319-5217-4cec-a54e-a99193f08f2e"
+                            "designerId": "e7b3252a-c1d4-4515-a847-6c6c80e1e069",
+                            "cn": [
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "hidden": true,
+                                        "itemId": "deleteTransaction",
+                                        "ui": "decline",
+                                        "iconCls": "trash",
+                                        "text": "Delete"
+                                    },
+                                    "designerId": "99ac8746-95f0-4db2-8c44-a9e94a5997c7"
+                                },
+                                {
+                                    "type": "Ext.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "itemId": "addTransaction",
+                                        "ui": "confirm",
+                                        "iconCls": "compose",
+                                        "text": "Save"
+                                    },
+                                    "designerId": "afb96319-5217-4cec-a54e-a99193f08f2e"
+                                }
+                            ]
                         }
                     ]
                 }
             ]
-        },
-        {
-            "type": "basiceventbinding",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "onAccountBalanceFormActivate",
-                "implHandler": [
-                    "var main = Ext.getCmp('main');",
-                    "",
-                    "main.query('#back')[0].hide();",
-                    "main.query('#editUser')[0].setText('Cancel');"
-                ],
-                "name": "activate"
-            },
-            "designerId": "75943a8d-52eb-4777-b060-835c24dd69d2"
-        },
-        {
-            "type": "basiceventbinding",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "onAccountBalanceFormDeactivate",
-                "implHandler": [
-                    "var main = Ext.getCmp('main');",
-                    "",
-                    "main.query('#editUser')[0].setText('Edit');",
-                    "main.query('#back')[0].show();"
-                ],
-                "name": "deactivate"
-            },
-            "designerId": "5c1567b8-9439-4366-b38c-cbcfd61fb9b4"
         }
     ]
 }

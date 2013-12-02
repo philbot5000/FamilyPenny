@@ -24,12 +24,12 @@
             "AccountForm",
             "UserAccountForm",
             "AccountBalanceForm",
-            "datetime1",
-            "DateTime"
+            "MyPanel"
         ],
         "requires": [
             "FP.config.Runtime",
-            "Ext.DateExtras"
+            "Ext.DateExtras",
+            "Ext.MessageBox"
         ],
         "controllers": [
             "Master",
@@ -84,7 +84,7 @@
                     "    records = store.data.items,",
                     "    total = 0;",
                     "",
-                    "",
+                    "console.log(records);",
                     "for(var i = 0; i < records.length; i++) {",
                     "",
                     "    total += records[i].data.amount;",
@@ -156,10 +156,10 @@
                     "navigator.camera.getPicture(onSuccess, onFail, settings);",
                     "",
                     "function onSuccess(imageData) {",
-                    "    ",
+                    "",
                     "    //console.log(imageData);",
                     "    return 'data:image/jpeg;base64,'+imageData;",
-                    "    ",
+                    "",
                     "}",
                     "",
                     "function onFail(message) {",
@@ -169,21 +169,6 @@
                 ]
             },
             "designerId": "c4e9f4c3-0900-4dd2-8bd3-eccdc82c0cb6"
-        },
-        {
-            "type": "basicfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "deleteUser",
-                "designer|params": [
-                    "id"
-                ]
-            },
-            "designerId": "46893bc8-be47-4bae-bceb-2dc9bf489112"
         }
     ]
 }
