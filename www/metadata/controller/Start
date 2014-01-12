@@ -1,0 +1,71 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Start"
+    },
+    "designerId": "1b7acb04-24d3-43c7-8741-8b51f32d59c7",
+    "cn": [
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "start",
+                "fn": "showStart",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    start = Ext.create('FP.view.Start');",
+                    "",
+                    "Ext.ComponentQuery.query('#toolbar')[0].hide();",
+                    "//toolbar.hide();",
+                    "main.setActiveItem(start);"
+                ]
+            },
+            "designerId": "3597e5bb-6714-4ea1-97d0-dc415d98e0f9"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLoginButtonTap",
+                "implHandler": [
+                    "this.redirectTo('login');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#loginButton"
+            },
+            "designerId": "ce3afe28-9bca-46c7-9f80-18934126b270"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSignUpButtonTap",
+                "implHandler": [
+                    "this.redirectTo('signup');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#signUpButton"
+            },
+            "designerId": "33ede179-ed1c-4cb3-a176-9604c1d18a41"
+        }
+    ]
+}

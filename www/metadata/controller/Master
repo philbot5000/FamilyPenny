@@ -63,7 +63,21 @@
                     "    component.element.addCls('main-inner');",
                     "});",
                     "",
-                    "this.redirectTo('accounts');"
+                    "//this.redirectTo('accounts');",
+                    "",
+                    "var currentUser = Parse.User.current();",
+                    "",
+                    "if (currentUser) {",
+                    "    // do stuff with the user",
+                    "    FP.app.redirectTo('accounts');",
+                    "",
+                    "} else {",
+                    "    // show the signup or login page",
+                    "",
+                    "    FP.app.redirectTo('start');",
+                    "    console.log('not logged in');",
+                    "",
+                    "}"
                 ],
                 "name": "initialize",
                 "designer|targetType": "Ext.Container",
@@ -186,26 +200,7 @@
             "userConfig": {
                 "fn": "onMenuButtonTap",
                 "implHandler": [
-                    "var main = Ext.getCmp('main'),",
-                    "    elem = main.element,",
-                    "    dragObj = main.getDraggable();",
-                    "",
-                    "",
-                    "if(main.isOpen) {",
-                    "    elem.translate(0,0,0);",
-                    "    dragObj.setOffset(0, 0);",
-                    "    //this.hideMenuButtons();",
-                    "    main.isOpen = false;",
-                    "    return;",
-                    "} ",
-                    "",
-                    "if(!main.isOpen){",
-                    "    elem.translate(250,0,0);",
-                    "    dragObj.setOffset(250, 0);",
-                    "    //this.showMenuButtons();",
-                    "    main.isOpen = true;",
-                    "    return;",
-                    "}"
+                    "this.toggleMenu();"
                 ],
                 "name": "tap",
                 "designer|targetType": "Ext.Button",
@@ -250,37 +245,37 @@
                     "",
                     "",
                     "switch(view) {",
-                    "    ",
+                    "",
                     "    case \"userAccounts\":",
-                    "        button.setText('Cancel');",
-                    "        this.redirectTo('accountForm/edit');",
-                    "\tbreak;",
-                    "        ",
+                    "    button.setText('Cancel');",
+                    "    this.redirectTo('accountForm/edit');",
+                    "    break;",
+                    "",
                     "    case \"userAccountForm\":",
-                    "        button.setText('Edit');",
-                    "        back.show();",
-                    "        this.redirectTo('accountBalance');",
-                    "\tbreak;",
-                    "        ",
+                    "    button.setText('Edit');",
+                    "    back.show();",
+                    "    this.redirectTo('accountBalance');",
+                    "    break;",
+                    "",
                     "    case \"accountForm\":",
-                    "        button.setText('Edit');",
-                    "        this.redirectTo('userAccounts');",
-                    "\tbreak;",
-                    "        ",
+                    "    button.setText('Edit');",
+                    "    this.redirectTo('userAccounts');",
+                    "    break;",
+                    "",
                     "    case \"accountBalance\":",
-                    "        button.setText('Cancel');",
-                    "        this.redirectTo('userAccountForm/edit');",
-                    "\tbreak;",
-                    "        ",
+                    "    button.setText('Cancel');",
+                    "    this.redirectTo('userAccountForm/edit');",
+                    "    break;",
+                    "",
                     "    case \"accountBalanceForm\":",
-                    "        button.setText('Edit');",
-                    "        if(runtime.getUserAccount() !== null) {",
-                    "\t\t\tthis.redirectTo('accountBalance');",
-                    "        }",
-                    "        else {",
-                    "            this.redirectTo('userAccounts');",
-                    "        }",
-                    "\tbreak;",
+                    "    button.setText('Edit');",
+                    "    if(runtime.getUserAccount() !== null) {",
+                    "        this.redirectTo('accountBalance');",
+                    "    }",
+                    "    else {",
+                    "        this.redirectTo('userAccounts');",
+                    "    }",
+                    "    break;",
                     "",
                     "}"
                 ],
@@ -342,6 +337,78 @@
                 "designer|controlQuery": "button#oneTimeTransaction"
             },
             "designerId": "f96d2c1f-d2d4-4797-804b-873df9102b4d"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSettingsTap",
+                "implHandler": [
+                    "this.redirectTo('settings');",
+                    "this.toggleMenu();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#settings"
+            },
+            "designerId": "5f38dff9-28c0-4e9b-81ab-4f479e45516a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "toggleMenu",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    elem = main.element,",
+                    "    dragObj = main.getDraggable();",
+                    "",
+                    "",
+                    "if(main.isOpen) {",
+                    "    elem.translate(0,0,0);",
+                    "    dragObj.setOffset(0, 0);",
+                    "    //this.hideMenuButtons();",
+                    "    main.isOpen = false;",
+                    "    return;",
+                    "} ",
+                    "",
+                    "if(!main.isOpen){",
+                    "    elem.translate(250,0,0);",
+                    "    dragObj.setOffset(250, 0);",
+                    "    //this.showMenuButtons();",
+                    "    main.isOpen = true;",
+                    "    return;",
+                    "}"
+                ]
+            },
+            "designerId": "ffb3d3ae-0ac4-4f5f-8d9a-acf32e5c50b7"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMainAccountsTap",
+                "implHandler": [
+                    "this.redirectTo('accounts');",
+                    "this.toggleMenu();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#mainAccounts"
+            },
+            "designerId": "1b121913-ea0e-44a0-9d4b-2f6ed79a691c"
         }
     ]
 }

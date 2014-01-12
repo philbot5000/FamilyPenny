@@ -38,6 +38,12 @@ Ext.define('FP.controller.Master', {
             },
             "button#oneTimeTransaction": {
                 tap: 'onOneTimeTransactionTap'
+            },
+            "button#settings": {
+                tap: 'onSettingsTap'
+            },
+            "button#mainAccounts": {
+                tap: 'onMainAccountsTap'
             }
         }
     },
@@ -86,7 +92,21 @@ Ext.define('FP.controller.Master', {
             component.element.addCls('main-inner');
         });
 
-        this.redirectTo('accounts');
+        //this.redirectTo('accounts');
+
+        var currentUser = Parse.User.current();
+
+        if (currentUser) {
+            // do stuff with the user
+            FP.app.redirectTo('accounts');
+
+        } else {
+            // show the signup or login page
+
+            FP.app.redirectTo('start');
+            console.log('not logged in');
+
+        }
     },
 
     onBackTap: function(button, e, eOpts) {
@@ -115,26 +135,7 @@ Ext.define('FP.controller.Master', {
     },
 
     onMenuButtonTap: function(button, e, eOpts) {
-        var main = Ext.getCmp('main'),
-            elem = main.element,
-            dragObj = main.getDraggable();
-
-
-        if(main.isOpen) {
-            elem.translate(0,0,0);
-            dragObj.setOffset(0, 0);
-            //this.hideMenuButtons();
-            main.isOpen = false;
-            return;
-        } 
-
-        if(!main.isOpen){
-            elem.translate(250,0,0);
-            dragObj.setOffset(250, 0);
-            //this.showMenuButtons();
-            main.isOpen = true;
-            return;
-        }
+        this.toggleMenu();
     },
 
     onAddUserTap: function(button, e, eOpts) {
@@ -211,6 +212,16 @@ Ext.define('FP.controller.Master', {
         this.redirectTo('accountBalanceForm');
     },
 
+    onSettingsTap: function(button, e, eOpts) {
+        this.redirectTo('settings');
+        this.toggleMenu();
+    },
+
+    onMainAccountsTap: function(button, e, eOpts) {
+        this.redirectTo('accounts');
+        this.toggleMenu();
+    },
+
     showMenuButtons: function() {
         var menu = Ext.ComponentQuery.query('#menu')[0],
             buttons = menu.query('button');
@@ -238,6 +249,29 @@ Ext.define('FP.controller.Master', {
             for(var i = 0; i < buttons.length; i++) {
                 buttons[i].element.setStyle('opacity', opacity);
             }
+        }
+    },
+
+    toggleMenu: function() {
+        var main = Ext.getCmp('main'),
+            elem = main.element,
+            dragObj = main.getDraggable();
+
+
+        if(main.isOpen) {
+            elem.translate(0,0,0);
+            dragObj.setOffset(0, 0);
+            //this.hideMenuButtons();
+            main.isOpen = false;
+            return;
+        } 
+
+        if(!main.isOpen){
+            elem.translate(250,0,0);
+            dragObj.setOffset(250, 0);
+            //this.showMenuButtons();
+            main.isOpen = true;
+            return;
         }
     }
 

@@ -48,7 +48,10 @@ Ext.define('FP.model.Account', {
                 name: 'accounts'
             },
             {
-                name: 'lastModified'
+                name: 'updatedAt'
+            },
+            {
+                name: 'createdAt'
             }
         ],
         proxy: {

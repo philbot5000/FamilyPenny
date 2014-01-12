@@ -33,6 +33,7 @@ Ext.define('FP.controller.UserAccounts', {
 
     onUserAccountsItemTap: function(dataview, index, target, record, e, eOpts) {
         FP.config.Runtime.setUserAccount(record.data);
+        console.log(record.data);
         this.redirectTo('accountBalance');
     },
 

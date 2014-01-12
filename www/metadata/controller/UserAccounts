@@ -55,6 +55,7 @@
                 "fn": "onUserAccountsItemTap",
                 "implHandler": [
                     "FP.config.Runtime.setUserAccount(record.data);",
+                    "console.log(record.data);",
                     "this.redirectTo('accountBalance');"
                 ],
                 "name": "itemtap",

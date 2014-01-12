@@ -54,6 +54,10 @@
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
             "update": "delta"
+        }, 
+        {
+            "path": "http://www.parsecdn.com/js/parse-1.2.15.min.js",
+            "remote": true
         }
     ],
 

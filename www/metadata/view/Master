@@ -61,7 +61,13 @@
                     "userConfig": {
                         "docked": "top",
                         "itemId": "toolbar",
+                        "showAnimation": [
+                            "{type: 'slideIn', direction: 'down'}"
+                        ],
                         "title": "Users"
+                    },
+                    "configAlternates": {
+                        "showAnimation": "object"
                     },
                     "designerId": "6da7a90e-bc67-4c70-88af-78072c9cfec7",
                     "cn": [
@@ -330,7 +336,9 @@
                     "userConfig": {
                         "fn": "onMainActiveItemChange",
                         "implHandler": [
-                            "oldValue.destroy();"
+                            "if(oldValue !== 0) {",
+                            "    oldValue.destroy();",
+                            "}"
                         ],
                         "name": "activeitemchange"
                     },
@@ -379,6 +387,7 @@
                         ],
                         "height": 50,
                         "hidden": false,
+                        "itemId": "mainAccounts",
                         "margin": "0 0 5 0",
                         "showAnimation": [
                             "{type: 'slideIn', direction: 'right'}"
@@ -466,6 +475,7 @@
                         ],
                         "height": 50,
                         "hidden": false,
+                        "itemId": "settings",
                         "margin": "0 0 5 0",
                         "showAnimation": [
                             "{type: 'slideIn', direction: 'left'}"

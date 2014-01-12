@@ -26,10 +26,6 @@ Ext.define('FP.model.AccountBalance', {
                 name: 'userAccount_id'
             },
             {
-                name: 'date',
-                type: 'date'
-            },
-            {
                 name: 'description'
             },
             {
@@ -38,6 +34,10 @@ Ext.define('FP.model.AccountBalance', {
             {
                 name: 'amount',
                 type: 'float'
+            },
+            {
+                name: 'date',
+                type: 'date'
             },
             {
                 convert: function(v, rec) {

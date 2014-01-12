@@ -1,0 +1,61 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Settings"
+    },
+    "designerId": "374074e1-4246-41f8-bc59-3cf1cb6f83da",
+    "cn": [
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "settings",
+                "fn": "showSettings",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    settings = Ext.create('FP.view.Settings');",
+                    "",
+                    "",
+                    "main.query('#addUser')[0].hide();",
+                    "main.query('#toolbar')[0].setTitle('Settings');",
+                    "main.query('#menuButton')[0].show();",
+                    "main.query('#back')[0].hide();",
+                    "main.query('#editUser')[0].hide();",
+                    "main.query('#accountMenu')[0].hide();",
+                    "",
+                    "",
+                    "main.setActiveItem(settings);"
+                ]
+            },
+            "designerId": "2f066b06-629f-46af-a991-dc7689638c82"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onLogoutTap",
+                "implHandler": [
+                    "this.redirectTo('start');",
+                    "Parse.User.logOut();"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#logout"
+            },
+            "designerId": "f0dc14a8-e63d-4402-8aa1-073a58d7ceae"
+        }
+    ]
+}

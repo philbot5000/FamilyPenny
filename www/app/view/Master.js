@@ -54,6 +54,10 @@ Ext.define('FP.view.Master', {
                         xtype: 'toolbar',
                         docked: 'top',
                         itemId: 'toolbar',
+                        showAnimation: {
+                            type: 'slideIn',
+                            direction: 'down'
+                        },
                         title: 'Users',
                         items: [
                             {
@@ -222,6 +226,7 @@ Ext.define('FP.view.Master', {
                         ],
                         height: 50,
                         hidden: false,
+                        itemId: 'mainAccounts',
                         margin: '0 0 5 0',
                         showAnimation: {
                             type: 'slideIn',
@@ -279,6 +284,7 @@ Ext.define('FP.view.Master', {
                         ],
                         height: 50,
                         hidden: false,
+                        itemId: 'settings',
                         margin: '0 0 5 0',
                         showAnimation: {
                             type: 'slideIn',
@@ -322,7 +328,9 @@ Ext.define('FP.view.Master', {
     },
 
     onMainActiveItemChange: function(container, value, oldValue, eOpts) {
-        oldValue.destroy();
+        if(oldValue !== 0) {
+            oldValue.destroy();
+        }
     }
 
 });

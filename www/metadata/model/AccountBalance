@@ -46,19 +46,6 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "date",
-                "type": "date"
-            },
-            "designerId": "389f9c5b-c6f5-419e-a0e9-ce7418fe55f6"
-        },
-        {
-            "type": "Ext.data.Field",
-            "reference": {
-                "name": "fields",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
                 "name": "description"
             },
             "designerId": "428415bb-0a4c-4a0c-8819-fa6828c44530"
@@ -87,6 +74,19 @@
                 "type": "float"
             },
             "designerId": "cedd8410-16a1-415d-ac1a-24da2be76418"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "date",
+                "type": "date"
+            },
+            "designerId": "389f9c5b-c6f5-419e-a0e9-ce7418fe55f6"
         },
         {
             "type": "Ext.data.Field",

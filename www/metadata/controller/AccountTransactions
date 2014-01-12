@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userClassName": "AccountBalance"
+        "designer|userClassName": "AccountTransactions"
     },
     "designerId": "91ab226e-245b-4633-92ef-68992c3658a5",
     "cn": [
@@ -154,11 +154,11 @@
                 ],
                 "implHandler": [
                     "if(total < 0) {",
-                    "    return 'Balance: <span class=\"negative\">($'+display+')</span>';",
+                    "    return '<span  style=\"font-size: 1.4em;\" class=\"negative\">($'+display+')</span>';",
                     "} else if(total > 0) {",
-                    "    return 'Balance: <span class=\"positive\">$'+display+'</span>';",
+                    "    return '<span  style=\"font-size: 1.4em;\" class=\"positive\">$'+display+'</span>';",
                     "} else if(total === 0) {",
-                    "    return 'Balance: <span class=\"zero\">$'+display+'</span>';",
+                    "    return '<span style=\"font-size: 1.4em;\" class=\"balanceDisplay zero\">$'+display+'</span>';",
                     "}"
                 ]
             },

@@ -45,6 +45,12 @@ Ext.define('FP.model.UserAccount', {
                 defaultValue: false,
                 name: 'defaultAccount',
                 type: 'boolean'
+            },
+            {
+                name: 'creditLimit'
+            },
+            {
+                name: 'loanAmount'
             }
         ],
         validations: [

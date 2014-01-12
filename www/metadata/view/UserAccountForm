@@ -88,6 +88,23 @@
                     "codeClass": null,
                     "userConfig": {
                         "hidden": true,
+                        "itemId": "loanAmount",
+                        "label": "Loan Amount:",
+                        "labelWidth": "50%",
+                        "name": "loanAmount",
+                        "placeHolder": "$0.00"
+                    },
+                    "designerId": "f378e50d-fd9a-4573-88d3-4c22caf63ba7"
+                },
+                {
+                    "type": "Ext.field.Number",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "hidden": true,
                         "hideAnimation": "fadeOut",
                         "itemId": "interest",
                         "showAnimation": [
@@ -128,27 +145,10 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "hidden": true,
-                        "itemId": "loanAmount",
-                        "label": "Loan Amount:",
-                        "labelWidth": "50%",
-                        "name": "loanAmount",
-                        "placeHolder": "$0.00"
-                    },
-                    "designerId": "f378e50d-fd9a-4573-88d3-4c22caf63ba7"
-                },
-                {
-                    "type": "Ext.field.Number",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
-                    },
-                    "codeClass": null,
-                    "userConfig": {
                         "border": 1,
                         "hidden": true,
                         "itemId": "term",
-                        "label": "Term:",
+                        "label": "Term in Months:",
                         "labelWidth": "50%",
                         "name": "term",
                         "placeHolder": "0"
@@ -213,7 +213,8 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "label": "Default:",
+                        "label": "Default Account:",
+                        "labelWidth": "50%",
                         "name": "defaultAccount",
                         "value": "true"
                     },

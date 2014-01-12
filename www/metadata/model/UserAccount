@@ -117,6 +117,30 @@
             "designerId": "6e5ed2cb-4ded-49d4-96a3-5d6baeefedfd"
         },
         {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "creditLimit"
+            },
+            "designerId": "82a8f396-8dd6-45d4-9061-a2a49429d5af"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "loanAmount"
+            },
+            "designerId": "495058f8-d59a-42b1-bca6-aa4d57bd7134"
+        },
+        {
             "type": "presencevalidation",
             "reference": {
                 "name": "validations",

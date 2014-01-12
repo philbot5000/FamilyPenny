@@ -117,11 +117,11 @@
         },
         "91ab226e-245b-4633-92ef-68992c3658a5": {
             "paths": [
-                "metadata/controller/AccountBalance",
-                "app/controller/override/AccountBalance.js",
-                "app/controller/AccountBalance.js"
+                "metadata/controller/AccountTransactions",
+                "app/controller/override/AccountTransactions.js",
+                "app/controller/AccountTransactions.js"
             ],
-            "className": "AccountBalance"
+            "className": "AccountTransactions"
         },
         "c9434b44-df2f-4701-a9b4-9b1ef7841fa2": {
             "paths": [
@@ -173,11 +173,11 @@
         },
         "be074027-f3e4-4d5e-ad96-ae3274005ec7": {
             "paths": [
-                "metadata/controller/AccountBalanceForm",
-                "app/controller/override/AccountBalanceForm.js",
-                "app/controller/AccountBalanceForm.js"
+                "metadata/controller/AccountTransactionForm",
+                "app/controller/override/AccountTransactionForm.js",
+                "app/controller/AccountTransactionForm.js"
             ],
-            "className": "AccountBalanceForm"
+            "className": "AccountTransactionForm"
         },
         "1af8f4da-876c-45ed-8d2b-d254790f9813": {
             "paths": [
@@ -186,10 +186,97 @@
                 "app/view/MyPanel.js"
             ],
             "className": "MyPanel"
+        },
+        "9e8ab026-cd9d-4b27-869e-f9192efbd190": {
+            "paths": [
+                "metadata/resource/js"
+            ],
+            "className": "js"
+        },
+        "6d0303c6-3147-4816-ab6d-3113d2981b1b": {
+            "paths": [
+                "metadata/view/Login",
+                "app/view/override/Login.js",
+                "app/view/Login.js"
+            ],
+            "className": "Login"
+        },
+        "6e5fdf82-ac83-4fd8-b13d-5c0589fa2bd3": {
+            "paths": [
+                "metadata/view/Start",
+                "app/view/override/Start.js",
+                "app/view/Start.js"
+            ],
+            "className": "Start"
+        },
+        "b4b958fa-38be-4f92-bbc9-1ddf1c9ee436": {
+            "paths": [
+                "metadata/view/SignUp",
+                "app/view/override/SignUp.js",
+                "app/view/SignUp.js"
+            ],
+            "className": "SignUp"
+        },
+        "1b7acb04-24d3-43c7-8741-8b51f32d59c7": {
+            "paths": [
+                "metadata/controller/Start",
+                "app/controller/override/Start.js",
+                "app/controller/Start.js"
+            ],
+            "className": "Start"
+        },
+        "23c10151-fb31-4b1c-8bc4-733a582b5c96": {
+            "paths": [
+                "metadata/controller/SignUp",
+                "app/controller/override/SignUp.js",
+                "app/controller/SignUp.js"
+            ],
+            "className": "SignUp"
+        },
+        "adf61528-1da7-40b7-90a2-aeefd3a7e517": {
+            "paths": [
+                "metadata/controller/Login",
+                "app/controller/override/Login.js",
+                "app/controller/Login.js"
+            ],
+            "className": "Login"
+        },
+        "36b145b7-1871-4dc5-8c57-e55f67e8ce2c": {
+            "paths": [
+                "metadata/view/Settings",
+                "app/view/override/Settings.js",
+                "app/view/Settings.js"
+            ],
+            "className": "Settings"
+        },
+        "374074e1-4246-41f8-bc59-3cf1cb6f83da": {
+            "paths": [
+                "metadata/controller/Settings",
+                "app/controller/override/Settings.js",
+                "app/controller/Settings.js"
+            ],
+            "className": "Settings"
+        },
+        "8b7bf508-05d2-4847-a183-0eaded746d43": {
+            "paths": [
+                "metadata/view/Introduction",
+                "app/view/override/Introduction.js",
+                "app/view/Introduction.js"
+            ],
+            "className": "Introduction"
+        },
+        "1193dd9c-a661-4285-a827-99c384749ce7": {
+            "paths": [
+                "metadata/controller/Introduction",
+                "app/controller/override/Introduction.js",
+                "app/controller/Introduction.js"
+            ],
+            "className": "Introduction"
         }
     },
     "viewOrderMap": {
         "view": [
+            "6e5fdf82-ac83-4fd8-b13d-5c0589fa2bd3",
             "8ce4896c-807e-4c71-8695-d71f0ea082e5",
             "0bcf733f-9ece-4e16-851a-d6643b91153e",
             "3115fe00-6bbb-4fff-9fb1-6020b019281c",
@@ -197,7 +284,11 @@
             "e037b4ff-2e20-4e18-b3c4-702b35458a4b",
             "d5abd865-dee8-4d55-9d66-d22990da7b1d",
             "1ada8916-3b55-4ef0-bb70-de6355884a38",
-            "1af8f4da-876c-45ed-8d2b-d254790f9813"
+            "1af8f4da-876c-45ed-8d2b-d254790f9813",
+            "6d0303c6-3147-4816-ab6d-3113d2981b1b",
+            "b4b958fa-38be-4f92-bbc9-1ddf1c9ee436",
+            "36b145b7-1871-4dc5-8c57-e55f67e8ce2c",
+            "8b7bf508-05d2-4847-a183-0eaded746d43"
         ],
         "store": [
             "cecfb960-dc32-47e7-9cca-09c58e3a687c",
@@ -207,11 +298,16 @@
         "controller": [
             "abf23ca3-f10e-4d44-be75-af05a17ff996",
             "91ab226e-245b-4633-92ef-68992c3658a5",
+            "be074027-f3e4-4d5e-ad96-ae3274005ec7",
             "c9434b44-df2f-4701-a9b4-9b1ef7841fa2",
             "6fbcda8a-ee79-4752-b45f-6775c527fa37",
             "cf4c2b5c-1084-4104-89d4-efaa69d8666f",
             "85935643-5aa8-4231-9085-1d6dc9bcfa4d",
-            "be074027-f3e4-4d5e-ad96-ae3274005ec7"
+            "1b7acb04-24d3-43c7-8741-8b51f32d59c7",
+            "23c10151-fb31-4b1c-8bc4-733a582b5c96",
+            "adf61528-1da7-40b7-90a2-aeefd3a7e517",
+            "374074e1-4246-41f8-bc59-3cf1cb6f83da",
+            "1193dd9c-a661-4285-a827-99c384749ce7"
         ],
         "model": [
             "334db879-ec9a-4880-b425-82e656450782",
@@ -220,7 +316,8 @@
         ],
         "resource": [
             "ef81f198-22e8-4497-a975-1a39b69f8bca",
-            "4cfa1c9e-4e7e-4bae-a130-6088f60869fc"
+            "4cfa1c9e-4e7e-4bae-a130-6088f60869fc",
+            "9e8ab026-cd9d-4b27-869e-f9192efbd190"
         ],
         "app": [
             "application"

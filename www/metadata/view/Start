@@ -1,0 +1,61 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "hideAnimation": "fadeOut",
+        "itemId": "start",
+        "padding": 20,
+        "style": "background: #fff;",
+        "designer|userClassName": "Start",
+        "layout": "vbox"
+    },
+    "designerId": "6e5fdf82-ac83-4fd8-b13d-5c0589fa2bd3",
+    "cn": [
+        {
+            "type": "Ext.Img",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 201,
+                "src": "images/fp.png"
+            },
+            "designerId": "dbfa3319-bad0-4d34-916e-3fcae7427b33"
+        },
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "loginButton",
+                "margin": "50 0 10 0",
+                "ui": "action",
+                "text": "Login"
+            },
+            "designerId": "fe32ac3f-e6d4-4c97-8864-b607b45d8cf8"
+        },
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "signUpButton",
+                "ui": "confirm",
+                "text": "Sign Up"
+            },
+            "designerId": "b0fd6480-965d-4b01-a1d5-2ae9b0ccfaae"
+        }
+    ]
+}

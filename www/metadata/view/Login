@@ -1,0 +1,185 @@
+{
+    "type": "Ext.form.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "itemId": "login",
+        "padding": null,
+        "designer|userClassName": "Login"
+    },
+    "designerId": "6d0303c6-3147-4816-ab6d-3113d2981b1b",
+    "cn": [
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "familyPennyLogin",
+                "title": "Family Penny"
+            },
+            "designerId": "4a9dcc98-b4f7-48c5-97c4-5c91b9f11d08",
+            "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "username",
+                        "label": "",
+                        "placeHolder": "Email"
+                    },
+                    "designerId": "e8c39188-0b98-4088-a738-32e20bbc6f82"
+                },
+                {
+                    "type": "Ext.field.Password",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "password",
+                        "label": "",
+                        "placeHolder": "Password"
+                    },
+                    "designerId": "046682fa-6c8b-418a-848d-6edd73e2a325"
+                },
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "login",
+                        "margin": 10,
+                        "ui": "action",
+                        "text": "Login"
+                    },
+                    "designerId": "366e1c73-9ba0-4e60-970a-930cb42620fe"
+                }
+            ]
+        },
+        {
+            "type": "Ext.form.FieldSet",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "hidden": true,
+                "itemId": "resetPassword",
+                "title": "Reset Password"
+            },
+            "designerId": "edfb9b48-d47c-4fd8-b6d8-64949650f13e",
+            "cn": [
+                {
+                    "type": "Ext.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "usernameReset",
+                        "label": "",
+                        "placeHolder": "Email"
+                    },
+                    "designerId": "63c32a1b-a649-4b1e-bda0-2b25623f130c",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onUsernameResetKeyup",
+                                "implHandler": [
+                                    ""
+                                ],
+                                "name": "keyup"
+                            },
+                            "designerId": "81fde7be-03d9-4b4b-b579-4b09470b9321"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.Container",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "padding": 15
+            },
+            "designerId": "32fb50a5-ef27-4f7e-96db-1b5eb27e387e",
+            "cn": [
+                {
+                    "type": "Ext.Button",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "itemId": "resetPassword",
+                        "style": "border: 1px solid #000;",
+                        "ui": "plain",
+                        "text": "Reset Password"
+                    },
+                    "designerId": "e8a7d5b8-528d-4bf1-afc9-b5675c250b9a",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onResetPasswordTap",
+                                "implHandler": [
+                                    "if(button.getUi() === \"plain\") {",
+                                    "    Ext.ComponentQuery.query('#resetPassword')[0].show();",
+                                    "}",
+                                    "",
+                                    "if(button.getUi() === \"confirm\") {",
+                                    "    var resetEmail = Ext.ComponentQuery.query('#usernameReset')[0].getValue();",
+                                    "    ",
+                                    "    Parse.User.requestPasswordReset(resetEmail, {",
+                                    "      success: function() {",
+                                    "        // Password reset request was sent successfully",
+                                    "      },",
+                                    "      error: function(error) {",
+                                    "        // Show the error message somewhere",
+                                    "        alert(\"Error: \" + error.code + \" \" + error.message);",
+                                    "      }",
+                                    "    });",
+                                    "}"
+                                ],
+                                "name": "tap"
+                            },
+                            "designerId": "b49ac5ff-e20a-41b0-9832-d7b602ffddc8"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

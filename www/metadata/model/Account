@@ -123,9 +123,21 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "lastModified"
+                "name": "updatedAt"
             },
             "designerId": "b8475cbe-df8a-4cad-bcc1-8b5996ec0061"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "createdAt"
+            },
+            "designerId": "8f72a7b8-ae54-4d11-b026-43815d8401f1"
         },
         {
             "type": "Ext.data.proxy.LocalStorage",

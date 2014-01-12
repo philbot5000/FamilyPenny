@@ -68,6 +68,15 @@ Ext.define('FP.view.UserAccountForm', {
                     {
                         xtype: 'numberfield',
                         hidden: true,
+                        itemId: 'loanAmount',
+                        label: 'Loan Amount:',
+                        labelWidth: '50%',
+                        name: 'loanAmount',
+                        placeHolder: '$0.00'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        hidden: true,
                         hideAnimation: 'fadeOut',
                         itemId: 'interest',
                         showAnimation: {
@@ -89,19 +98,10 @@ Ext.define('FP.view.UserAccountForm', {
                     },
                     {
                         xtype: 'numberfield',
-                        hidden: true,
-                        itemId: 'loanAmount',
-                        label: 'Loan Amount:',
-                        labelWidth: '50%',
-                        name: 'loanAmount',
-                        placeHolder: '$0.00'
-                    },
-                    {
-                        xtype: 'numberfield',
                         border: 1,
                         hidden: true,
                         itemId: 'term',
-                        label: 'Term:',
+                        label: 'Term in Months:',
                         labelWidth: '50%',
                         name: 'term',
                         placeHolder: '0'
@@ -131,7 +131,8 @@ Ext.define('FP.view.UserAccountForm', {
                     },
                     {
                         xtype: 'checkboxfield',
-                        label: 'Default:',
+                        label: 'Default Account:',
+                        labelWidth: '50%',
                         name: 'defaultAccount',
                         value: 'true'
                     },

@@ -1,0 +1,28 @@
+{
+    "type": "Ext.Container",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "padding": 15,
+        "designer|userClassName": "Settings"
+    },
+    "designerId": "36b145b7-1871-4dc5-8c57-e55f67e8ce2c",
+    "cn": [
+        {
+            "type": "Ext.Button",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "itemId": "logout",
+                "text": "Logout"
+            },
+            "designerId": "7b31e79a-0904-49f5-8065-db29ddc123fd"
+        }
+    ]
+}

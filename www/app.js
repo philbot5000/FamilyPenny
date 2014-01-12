@@ -21,8 +21,7 @@ Ext.Loader.setConfig({
 Ext.application({
     models: [
         'Account',
-        'UserAccount',
-        'AccountBalance'
+        'UserAccount'
     ],
     stores: [
         'Accounts',
@@ -37,7 +36,12 @@ Ext.application({
         'AccountForm',
         'UserAccountForm',
         'AccountBalanceForm',
-        'MyPanel'
+        'MyPanel',
+        'Login',
+        'Start',
+        'SignUp',
+        'Settings',
+        'Introduction'
     ],
     requires: [
         'FP.config.Runtime',
@@ -46,16 +50,22 @@ Ext.application({
     ],
     controllers: [
         'Master',
-        'AccountBalance',
+        'AccountTransactions',
         'Accounts',
         'AccountForm',
         'UserAccounts',
         'UserAccountForm',
-        'AccountBalanceForm'
+        'AccountTransactionForm',
+        'Start',
+        'SignUp',
+        'Login',
+        'Settings',
+        'Introduction'
     ],
     name: 'FP',
 
     launch: function() {
+        // Makes room for our iOS 7 toolbar...
         if(Ext.os.is.iOS) {
 
             if(parseFloat(device.version) >= 7.0) {
@@ -68,6 +78,11 @@ Ext.application({
                 html.style.backgroundColor = '#1468A2';
             }
         }
+
+        // Parse set up -------------- 
+        Parse.initialize("a2pPfe7u8rb4NUO9lqFGN606n7hvDltjw3Co0m5s", "ketPek6eoZ3grYjXSJDV47jNKGUavgIlpa9MdvvM");
+
+
         Ext.create('FP.view.Master', {fullscreen: true});
     },
 
@@ -76,7 +91,6 @@ Ext.application({
             records = store.data.items,
             total = 0;
 
-        console.log(records);
         for(var i = 0; i < records.length; i++) {
 
             total += records[i].data.amount;
@@ -88,19 +102,40 @@ Ext.application({
     },
 
     updateNumberOfAccounts: function() {
-        var store = Ext.getStore('userAccounts'),
-            number = store.data.length,
-            userId = FP.config.Runtime.getUserAccount().account_id;
+        /*  THIS FUNCTION WAS MOVED INSIDE THE UserAccountForm Controller .....
 
-        console.log(number+' '+userId);
+
+
+
+
+        var store = Ext.getStore('userAccounts'),
+        number = store.data.length,
+        userId = FP.config.Runtime.getUserAccount().account_id;
+
+
+        var Account = Parse.Object.extend("Account");
+        var query = new Parse.Query(Account);
+
+        query.equalTo("localId", userId);
+        query.find({
+        success: function(results) {
+        // should only ever be one ...
+        var parseRecord = results[0];
+        parseRecord.set('accounts', number);
+        parseRecord.save();
 
         var accounts = Ext.getStore('accounts'),
-            index = accounts.findExact('id', userId);
-        user = accounts.getAt(index);
+            index = accounts.findExact('id', userId),
+            user = accounts.getAt(index);
 
-        console.log(index);
         user.set('accounts', number);
         accounts.sync();
+
+    },
+    error: function(error) {
+        Ext.Msg.alert("Error: " + error.code + " " + error.message);
+    }
+    }); */
     },
 
     takePicture: function() {

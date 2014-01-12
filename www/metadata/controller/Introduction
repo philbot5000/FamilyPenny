@@ -1,0 +1,73 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "Introduction"
+    },
+    "designerId": "1193dd9c-a661-4285-a827-99c384749ce7",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSkipIntroTap",
+                "implHandler": [
+                    "Ext.ComponentQuery.query('#toolbar')[0].show();",
+                    "this.redirectTo('accounts');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#skipIntro"
+            },
+            "designerId": "41b2ba0e-c219-4630-be5d-6b5e44efabd4"
+        },
+        {
+            "type": "Ext.app.Route",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "intro",
+                "fn": "showIntro",
+                "implHandler": [
+                    "var main = Ext.getCmp('main'),",
+                    "    intro = Ext.create('FP.view.Introduction');",
+                    "",
+                    "//Ext.ComponentQuery.query('#toolbar')[0].hide();",
+                    "//toolbar.hide();",
+                    "main.setActiveItem(intro);"
+                ]
+            },
+            "designerId": "6c150563-0730-4257-a3c0-fbfaefc3182b"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onAddAccountTap",
+                "implHandler": [
+                    "Ext.ComponentQuery.query('#toolbar')[0].show();",
+                    "this.redirectTo('accountForm');"
+                ],
+                "name": "tap",
+                "designer|targetType": "Ext.Button",
+                "designer|controlQuery": "button#addAccount"
+            },
+            "designerId": "bd895518-3868-45be-87d2-4d41cabf6576"
+        }
+    ]
+}

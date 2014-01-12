@@ -49,42 +49,33 @@ Ext.define('FP.controller.AccountForm', {
     onSubmitUserTap: function(button, e, eOpts) {
         var account = Ext.ComponentQuery.query('#accountForm')[0],
             accountValues = account.getValues(),
-            store = Ext.getStore('accounts'),
-            model = Ext.create('FP.model.Account', accountValues),
+            /*    store = Ext.getStore('accounts'), */
+            model = Ext.create('FP.model.Account', accountValues), 
             errorMessage,
             errors = model.validate();
 
 
+        // EDIT USER ...
         if(account.edit) {
             // get record in local storage and set new values and sync...
-            var id = FP.config.Runtime.getAccount().id,
-                index = store.findExact('id', id),
-                record = store.getAt(index);
-
-            record.set('firstName', accountValues.firstName);
-            record.set('lastName', accountValues.lastName);
-
-            store.sync();
-            this.redirectTo('accounts');
+            this.updateUser(accountValues);   
 
 
         } else {
 
+            // Input Validation ...
             if(!errors.isValid()) {
                 errors.each(function(err) {
                     errorMessage += err.getMessage() + '\n ';
                 });
 
                 alert(errorMessage);
-                //console.log(errors);
 
             } else {
+                // CREATE NEW USER ...
+                this.createUser(accountValues);
+                FP.app.redirectTo('accounts');
 
-                model.set('accounts', 0);
-                store.add(model);
-                store.sync();
-
-                this.redirectTo('accounts');
             }
         }
     },
@@ -176,7 +167,95 @@ Ext.define('FP.controller.AccountForm', {
         main.setActiveItem(editUser);
     },
 
-    deleteUser: function() {
+    createUser: function(accountValues) {
+        var store = Ext.getStore('accounts'),
+            model = Ext.create('FP.model.Account', accountValues);
+
+
+        /* TODO: don't allow local save unless user can save to parse: 
+        *  - How should we handle local save and sync when user is offline?.
+        *  - It would be easier to always save to parse
+        **/
+
+
+        /* Parse */
+
+        var ParseAccount = Parse.Object.extend("Account");
+        var pAccount = new ParseAccount();
+
+        pAccount.set("id", accountValues.id);
+        pAccount.set("firstName", accountValues.firstName);
+        pAccount.set("lastName", accountValues.lastName);
+        pAccount.set("email", accountValues.email);
+        pAccount.set("accountType", accountValues.accountType);
+        pAccount.set("summaryType", accountValues.summaryType);
+        pAccount.set("accounts", 0);
+        //pAccount.set("", accountValues);
+
+        pAccount.save(null, {
+            success: function(result) {
+                // For now only create account locally after user has been successfully saved
+                // to Parse
+
+                model.set('accounts', 0);
+                var sModel = store.add(model);       
+                console.log(sModel[0].data.id);
+
+                result.set('localId', sModel[0].data.id);
+                result.save();
+
+                store.sync();
+
+                FP.app.redirectTo('accounts');
+
+            },
+            error: function(result, error) {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and description.
+                alert('Failed to create new object, with error code: ' + error.description);
+            }
+        });
+    },
+
+    updateUser: function(accountValues) {
+        var id = FP.config.Runtime.getAccount().id,
+            store = Ext.getStore('accounts'),
+            index = store.findExact('id', id),
+            record = store.getAt(index);
+
+        /* Parse.com */
+
+        var Account = Parse.Object.extend("Account");
+        var query = new Parse.Query(Account);
+        query.equalTo("localId", id);
+        query.find({
+            success: function(results) {
+                // should only ever be 1 record...
+                var parseRecord = results[0];
+
+                /* Local */
+                record.set('firstName', accountValues.firstName);
+                record.set('lastName', accountValues.lastName);
+                record.set('email', accountValues.email);
+                record.set('accountType', accountValues.accountType);
+                record.set('summaryType', accountValues.summaryType);
+                store.sync();
+
+                /* Parse */
+                parseRecord.set('firstName', accountValues.firstName);
+                parseRecord.set('lastName', accountValues.lastName);
+                parseRecord.set('email', accountValues.email);
+                parseRecord.set('accountType', accountValues.accountType);
+                parseRecord.set('summaryType', accountValues.summaryType);
+                parseRecord.save();
+
+                FP.app.redirectTo('accounts');
+            },
+            error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
+
 
     }
 

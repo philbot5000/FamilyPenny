@@ -60,7 +60,7 @@ Ext.define('FP.controller.UserAccountForm', {
 
             } else {
 
-                this.addUserAccount(accountValues);
+                this.createUserAccount(accountValues);
 
             }
         }
@@ -121,22 +121,51 @@ Ext.define('FP.controller.UserAccountForm', {
         // find the record that is default (should be only one).
         // set that record to dafualt false
 
+
+        /* Local */
         var store = Ext.getStore('userAccounts');
 
         store.filter('account_id', FP.config.Runtime.getAccount().id);
 
         var index = store.findExact('defaultAccount', true);
 
+        /* Local */
         if(index !== -1) {
 
-            var record = store.getAt(index);
-
-            console.log(record);
-
+            var record = store.getAt(index);        
             record.set('defaultAccount', false);
         }
 
         store.clearFilter();
+    },
+
+    resetParseDefaultAccount: function(localId, account_id) {
+        /* This function accepts two parameters,
+        * localId - the unique id for this account
+        * account_id - the unique id for this user
+        *
+        */
+
+        var UserAccount = Parse.Object.extend("UserAccount");
+        var query = new Parse.Query(UserAccount);
+
+        query.equalTo("account_id", FP.config.Runtime.getAccount().id);
+        query.equalTo("defaultAccount", "true");
+        query.find({
+            success: function(results) {
+                // should be only one result ever...
+
+                console.log(results);
+
+
+
+
+
+            },
+            error: function(error) {
+                Ext.Msg.alert("Error: " + error.code + " " + error.message);
+            }
+        });
     },
 
     deleteAccount: function(id) {
@@ -154,7 +183,9 @@ Ext.define('FP.controller.UserAccountForm', {
     },
 
     showAccountOptions: function(account) {
-        //console.log(account);
+
+        // **** TODO: Add conditional validation ...
+
         var term = Ext.ComponentQuery.query('#term')[0],
             interest = Ext.ComponentQuery.query('#interest')[0],
             creditLimit = Ext.ComponentQuery.query('#creditLimit')[0],
@@ -196,21 +227,99 @@ Ext.define('FP.controller.UserAccountForm', {
 
     },
 
-    addUserAccount: function(accountValues) {
+    updateNumberOfAccounts: function() {
         var store = Ext.getStore('userAccounts'),
-            model = Ext.create('FP.model.UserAccount', accountValues);
+            number = store.data.length,
+            userId = FP.config.Runtime.getUserAccount().account_id;
+
+
+        var Account = Parse.Object.extend("Account");
+        var query = new Parse.Query(Account);
+
+        query.equalTo("localId", userId);
+        query.find({
+            success: function(results) {
+                // should only ever be one ...
+                var parseRecord = results[0];
+                /* Parse */
+                parseRecord.set('accounts', number);
+                parseRecord.save();
+
+                /* Local */
+                var accounts = Ext.getStore('accounts'),
+                    index = accounts.findExact('id', userId),
+                    user = accounts.getAt(index);
+
+                user.set('accounts', number);
+                accounts.sync();
+
+            },
+            error: function(error) {
+                Ext.Msg.alert("Error: " + error.code + " " + error.message);
+            }
+        });
+    },
+
+    createUserAccount: function(accountValues) {
+        var store = Ext.getStore('userAccounts'),
+            model = Ext.create('FP.model.UserAccount', accountValues),
+            me = this,
+            amount = 0;
+
+
+        // This should be a promise with Parse...
+        // If default account has been set to true we must first reset old default account
+        // to false on both Parse and Local
+        // 
+
+
+        model.set('balance', amount);
+
+        var UserAccount = Parse.Object.extend("UserAccount");
+        var pUserAccount = new UserAccount();
 
 
         if(accountValues.defaultAccount) {
+            // TODO: Check this wit parse
             this.resetOldDefaultAccount();
         }
 
-        model.set('balance', 0);
-        store.add(model);
-        store.sync();
-        FP.config.Runtime.setUserAccount(model.data);
-        FP.app.updateNumberOfAccounts();
-        this.redirectTo('userAccounts');
+        pUserAccount.set("account_id", accountValues.account_id);
+        pUserAccount.set("type", accountValues.type);
+        pUserAccount.set("name", accountValues.name);
+        pUserAccount.set("balance", amount);
+        pUserAccount.set("interest", accountValues.interest);
+        pUserAccount.set("term", accountValues.term);
+        pUserAccount.set("defaultAccount", accountValues.defaultAccount);
+
+        pUserAccount.save(null, {
+            success: function(result) {
+
+                pRecord = result[0];
+                var sModel = store.add(model);
+                store.sync();
+
+
+                result.set("localId", sModel[0].data.id);
+                result.save();
+
+                FP.config.Runtime.setUserAccount(model.data);
+
+                me.resetParseDefaultAccount(sModel[0].data.id, accountValues.account_id);
+                me.updateNumberOfAccounts();
+
+
+                FP.app.redirectTo('userAccounts');
+            },
+            error: function(gameScore, error) {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and description.
+                alert('Failed to create new object, with error code: ' + error.description);
+            }
+        });
+
+
+
     },
 
     updateUserAccount: function(accountValues) {
@@ -218,25 +327,55 @@ Ext.define('FP.controller.UserAccountForm', {
         var id = FP.config.Runtime.getUserAccount().id,
             store = Ext.getStore('userAccounts'),
             index = store.findExact('id', id),
-            record = store.getAt(index);
+            record = store.getAt(index),
+            me = this;
 
         //Ext.ComponentQuery.query('#editUser')[0].setText('Edit');
         //Ext.ComponentQuery.query('#back')[0].show();
 
         if(accountValues.defaultAccount) {
-            this.resetOldDefaultAccount();
+            me.resetOldDefaultAccount();
         }
 
-        record.set('name', accountValues.name);
-        record.set('type', accountValues.type);
-        record.set('interest', accountValues.interest);
-        record.set('term', accountValues.term);
-        record.set('defaultAccount', accountValues.defaultAccount);
 
 
+        /* Parse.com */
 
-        store.sync();
-        this.redirectTo('accountBalance');
+        var UserAccount = Parse.Object.extend("UserAccount");
+        var query = new Parse.Query(UserAccount);
+        query.equalTo("localId", id);
+        query.find({
+            success: function(results) {
+                // should only ever be 1 record...
+                var parseRecord = results[0];
+
+                /* Local */
+                record.set('name', accountValues.name);
+                record.set('type', accountValues.type);
+                record.set('interest', accountValues.interest);
+                record.set('term', accountValues.term);
+                record.set('defaultAccount', accountValues.defaultAccount);
+
+                store.sync();
+
+                /* Parse */
+                parseRecord.set('name', accountValues.name);
+                parseRecord.set('type', accountValues.type);
+                parseRecord.set('interest', accountValues.interest);
+                parseRecord.set('term', accountValues.term);
+                parseRecord.set('defaultAccount', accountValues.defaultAccount);
+                parseRecord.save();
+
+                if(accountValues.defaultAccount) {
+                    me.resetParseDefaultAccount(accountValues.id);
+                }
+
+                me.redirectTo('accountBalance');
+            },
+            error: function(error) {
+                alert("Error: " + error.code + " " + error.message);
+            }
+        });
     }
 
 });
